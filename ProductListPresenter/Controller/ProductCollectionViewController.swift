@@ -49,7 +49,7 @@ class ProductCollectionViewController: UICollectionViewController {
             self.collectionView?.reloadData()
         }
         
-        print("viewDidLoad ended")
+        print("ProductCollectionViewController - viewDidLoad ended")
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,5 +7,6 @@ target 'ProductListPresenter' do
 
   # Pods for ProductListPresenter
   pod 'Alamofire'
+  pod 'SDWebImage'
 
 end
