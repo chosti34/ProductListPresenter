@@ -12,7 +12,9 @@ import SDWebImage
 
 class CategoryCollectionViewController: UICollectionViewController {
 
-    let url = "http://ostest.whitetigersoft.ru/api/common/category/list?appKey=yx-1PU73oUj6gfk0hNyrNUwhWnmBRld7-SfKAU7Kg6Fpp43anR261KDiQ-MY4P2SRwH_cd4Py1OCY5jpPnY_Viyzja-s18njTLc0E7XcZFwwvi32zX-B91Sdwq1KeZ7m"
+    static var appKey = "yx-1PU73oUj6gfk0hNyrNUwhWnmBRld7-SfKAU7Kg6Fpp43anR261KDiQ-MY4P2SRwH_cd4Py1OCY5jpPnY_Viyzja-s18njTLc0E7XcZFwwvi32zX-B91Sdwq1KeZ7m"
+    let url = "http://ostest.whitetigersoft.ru/api/common/category/list?appKey=\(appKey)"
+
     var categories: [Category] = []
 
     private func parseAndAppendCategory(categoryJson: [String: Any]) {
@@ -27,19 +29,13 @@ class CategoryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        // self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CategoryCell")
-
         // Запрашиваем список категорий
         Alamofire.request(self.url).validate().responseJSON { response in
             if !response.result.isSuccess {
                 print("Error")
                 return
             }
-            
+
             if let json = response.result.value as? [String: [String: Any]] {
                 if let categoriesJson = json["data"]!["categories"]! as? [[String: Any]] {
                     for categoryJson in categoriesJson {
@@ -55,81 +51,55 @@ class CategoryCollectionViewController: UICollectionViewController {
         print("CategoryCollectionViewController - viewDidLoad ended")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return categories.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath)
-            as! CategoryCollectionViewCell
-        
-        let category: Category = categories[indexPath.item]
-        
-        // Configure the cell
-        cell.titleLabel.text = category.title
+        // Достаем ячейку с категорией
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
+        let category: Category = categories[indexPath.row]
+
+        // Конфигурируем интерфейс ячейки
         cell.imageView.layer.borderColor = UIColor.black.cgColor
         cell.imageView.layer.borderWidth = 1
-        
+
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = 10
-        
-        if let imageUrl = category.imageUrl {
-            if let url = URL(string: imageUrl) {
-                cell.imageView.sd_setImage(with: url)
-            }
-        }
+        cell.layer.cornerRadius = 5
+
+        // Устанавливаем заголовок категории
+        cell.titleLabel.text = category.title
+
+        // Устанавливаем изображение категории
+        let url: URL? = (category.imageUrl != nil) ? URL(string: category.imageUrl!) : nil
+        cell.imageView.sd_setImage(
+            with: url,
+            placeholderImage: UIImage(named: "placeholder"),
+            options: SDWebImageOptions.continueInBackground)
         
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let productCollectionViewController = storyboard.instantiateViewController(withIdentifier: "ProductCollectionViewController") as! ProductCollectionViewController
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+        let category: Category = categories[indexPath.row]
+        productCollectionViewController.categoryId = category.id
+        productCollectionViewController.categoryName = category.title
+
+        self.navigationController?.pushViewController(productCollectionViewController, animated: true)
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
+
+
+
+
+
+
+
+
+
+

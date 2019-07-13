@@ -2,7 +2,7 @@ import UIKit
 
 class Product {
     var id: Int = 0
-    var price: Int = 0
+    var price: Int? = 0
     var title: String = ""
     var forSale: Bool = false
     var description: String? = nil
@@ -11,7 +11,7 @@ class Product {
 
     init(
         id: Int,
-        price: Int,
+        price: Int?,
         title: String,
         forSale: Bool,
         description: String?,
