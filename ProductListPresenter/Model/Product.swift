@@ -9,15 +9,8 @@ class Product {
     var imageUrl: String? = nil
     var rating: Int? = nil
 
-    init(
-        id: Int,
-        price: Int?,
-        title: String,
-        forSale: Bool,
-        description: String?,
-        imageUrl: String?,
-        rating: Int?
-    ) {
+    init(id: Int, price: Int?, title: String, forSale: Bool,
+         description: String?, imageUrl: String?, rating: Int?) {
         self.id = id
         self.price = price
         self.title = title

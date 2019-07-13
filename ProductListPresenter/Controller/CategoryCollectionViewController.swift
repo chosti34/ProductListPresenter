@@ -7,47 +7,21 @@
 //
 
 import UIKit
-import Alamofire
 import SDWebImage
 
 class CategoryCollectionViewController: UICollectionViewController {
 
-    static var appKey = "yx-1PU73oUj6gfk0hNyrNUwhWnmBRld7-SfKAU7Kg6Fpp43anR261KDiQ-MY4P2SRwH_cd4Py1OCY5jpPnY_Viyzja-s18njTLc0E7XcZFwwvi32zX-B91Sdwq1KeZ7m"
-    let url = "http://ostest.whitetigersoft.ru/api/common/category/list?appKey=\(appKey)"
-
     var categories: [Category] = []
-
-    private func parseAndAppendCategory(categoryJson: [String: Any]) {
-        let categoryId: Int = categoryJson["categoryId"] as! Int
-        let title: String = categoryJson["title"] as! String
-        let imageUrl: String? = categoryJson["imageUrl"] as? String
-        
-        let category: Category = Category(id: categoryId, title: title, imageUrl: imageUrl)
-        categories.append(category)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Запрашиваем список категорий
-        Alamofire.request(self.url).validate().responseJSON { response in
-            if !response.result.isSuccess {
-                print("Error")
-                return
-            }
-
-            if let json = response.result.value as? [String: [String: Any]] {
-                if let categoriesJson = json["data"]!["categories"]! as? [[String: Any]] {
-                    for categoryJson in categoriesJson {
-                        self.parseAndAppendCategory(categoryJson: categoryJson)
-                    }
-                }
-            }
-
+        let categoryApi: CategoryApi = CategoryApi()
+        categoryApi.fetchAllCategories { (categories: [Category]) in
+            self.categories = categories
             self.collectionView?.reloadData()
         }
 
-        // Do any additional setup after loading the view.
         print("CategoryCollectionViewController - viewDidLoad ended")
     }
 
@@ -60,7 +34,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
         let category: Category = categories[indexPath.row]
-
+        
         // Конфигурируем интерфейс ячейки
         cell.imageView.layer.borderColor = UIColor.black.cgColor
         cell.imageView.layer.borderWidth = 1

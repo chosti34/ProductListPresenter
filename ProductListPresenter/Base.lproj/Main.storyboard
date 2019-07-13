@@ -50,14 +50,13 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="IfQ-dq-MsL" firstAttribute="top" secondItem="uZo-h4-NHJ" secondAttribute="top" constant="10" id="1gD-nR-kLF"/>
-                                    <constraint firstAttribute="trailing" secondItem="9c4-Mf-a7v" secondAttribute="trailing" constant="10" id="9dN-gr-dVv"/>
-                                    <constraint firstItem="IfQ-dq-MsL" firstAttribute="leading" secondItem="uZo-h4-NHJ" secondAttribute="leading" constant="10" id="K63-aK-xlq"/>
-                                    <constraint firstItem="IfQ-dq-MsL" firstAttribute="centerX" secondItem="uZo-h4-NHJ" secondAttribute="centerX" id="QKR-Oh-KI6"/>
-                                    <constraint firstItem="9c4-Mf-a7v" firstAttribute="top" secondItem="IfQ-dq-MsL" secondAttribute="bottom" constant="10" id="YbO-VM-lJU"/>
-                                    <constraint firstItem="9c4-Mf-a7v" firstAttribute="leading" secondItem="uZo-h4-NHJ" secondAttribute="leading" constant="10" id="bBT-sF-W9j"/>
-                                    <constraint firstAttribute="trailing" secondItem="IfQ-dq-MsL" secondAttribute="trailing" constant="10" id="gqx-88-a8S"/>
-                                    <constraint firstAttribute="bottom" secondItem="9c4-Mf-a7v" secondAttribute="bottom" constant="10" id="xEp-hx-lES"/>
+                                    <constraint firstItem="IfQ-dq-MsL" firstAttribute="leading" secondItem="uZo-h4-NHJ" secondAttribute="leading" constant="10" id="9HX-hy-QfG"/>
+                                    <constraint firstItem="9c4-Mf-a7v" firstAttribute="leading" secondItem="uZo-h4-NHJ" secondAttribute="leading" constant="10" id="Alt-tW-tIk"/>
+                                    <constraint firstAttribute="trailing" secondItem="IfQ-dq-MsL" secondAttribute="trailing" constant="10" id="JRA-jx-B1L"/>
+                                    <constraint firstItem="IfQ-dq-MsL" firstAttribute="top" secondItem="uZo-h4-NHJ" secondAttribute="top" constant="10" id="bYa-sQ-X6i"/>
+                                    <constraint firstAttribute="trailing" secondItem="9c4-Mf-a7v" secondAttribute="trailing" constant="10" id="rqC-Kx-ofQ"/>
+                                    <constraint firstItem="9c4-Mf-a7v" firstAttribute="top" secondItem="IfQ-dq-MsL" secondAttribute="bottom" constant="10" id="rvr-p6-6MG"/>
+                                    <constraint firstAttribute="bottom" secondItem="9c4-Mf-a7v" secondAttribute="bottom" constant="10" id="zvQ-oY-pNa"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="9c4-Mf-a7v" id="XYI-cw-eiD"/>
