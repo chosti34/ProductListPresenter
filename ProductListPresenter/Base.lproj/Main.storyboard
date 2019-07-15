@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,21 +89,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Peb-2H-lub">
-                            <size key="itemSize" width="160" height="150"/>
+                            <size key="itemSize" width="333" height="158"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="s02-xF-jcw" customClass="ProductCollectionViewCell" customModule="ProductListPresenter" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="160" height="150"/>
+                                <rect key="frame" x="21" y="20" width="333" height="158"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="333" height="158"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0I-We-enK">
-                                            <rect key="frame" x="15" y="99" width="130" height="36"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQD-cm-1Zt">
+                                            <rect key="frame" x="175" y="53" width="143" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xve-qm-TG2">
+                                            <rect key="frame" x="10" y="10" width="150" height="138"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="150" id="bVQ-pA-18B"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя продукта" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ8-q0-zka">
+                                            <rect key="frame" x="175" y="15" width="143" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0I-We-enK" customClass="ProductCellButton" customModule="ProductListPresenter" customModuleProvider="target">
+                                            <rect key="frame" x="175" y="96" width="143" height="39"/>
                                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Подробнее">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,34 +130,27 @@
                                                 <segue destination="Uix-xm-XrG" kind="show" id="xHf-rb-zMs"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQD-cm-1Zt">
-                                            <rect key="frame" x="15" y="63.5" width="130" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя продукта" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ8-q0-zka">
-                                            <rect key="frame" x="23" y="23" width="114" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="B0I-We-enK" secondAttribute="bottom" constant="15" id="065-4j-sWx"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="jQ8-q0-zka" secondAttribute="trailing" constant="15" id="7Ma-IE-vGM"/>
-                                    <constraint firstItem="jQ8-q0-zka" firstAttribute="leading" secondItem="s02-xF-jcw" secondAttribute="leadingMargin" constant="15" id="8vl-Kc-fZF"/>
-                                    <constraint firstItem="FQD-cm-1Zt" firstAttribute="leading" secondItem="s02-xF-jcw" secondAttribute="leading" constant="15" id="Hzd-em-qfo"/>
-                                    <constraint firstAttribute="trailing" secondItem="FQD-cm-1Zt" secondAttribute="trailing" constant="15" id="K91-jY-loR"/>
-                                    <constraint firstItem="B0I-We-enK" firstAttribute="top" secondItem="FQD-cm-1Zt" secondAttribute="bottom" constant="15" id="RQB-de-zhm"/>
-                                    <constraint firstAttribute="trailing" secondItem="B0I-We-enK" secondAttribute="trailing" constant="15" id="gSC-Xf-QnQ"/>
-                                    <constraint firstItem="FQD-cm-1Zt" firstAttribute="top" secondItem="jQ8-q0-zka" secondAttribute="bottom" constant="20" id="jLe-y9-tBb"/>
-                                    <constraint firstItem="B0I-We-enK" firstAttribute="leading" secondItem="s02-xF-jcw" secondAttribute="leading" constant="15" id="pJd-SH-jrV"/>
-                                    <constraint firstItem="jQ8-q0-zka" firstAttribute="top" secondItem="s02-xF-jcw" secondAttribute="topMargin" constant="15" id="sJ6-MF-j8d"/>
+                                    <constraint firstAttribute="trailing" secondItem="FQD-cm-1Zt" secondAttribute="trailing" constant="15" id="BFm-sN-fH3"/>
+                                    <constraint firstItem="B0I-We-enK" firstAttribute="top" secondItem="FQD-cm-1Zt" secondAttribute="bottom" constant="25" id="FJs-w2-aqr"/>
+                                    <constraint firstItem="Xve-qm-TG2" firstAttribute="leading" secondItem="s02-xF-jcw" secondAttribute="leading" constant="10" id="FvR-Ou-AUp"/>
+                                    <constraint firstAttribute="trailing" secondItem="jQ8-q0-zka" secondAttribute="trailing" constant="15" id="Lkz-Dm-PFZ"/>
+                                    <constraint firstItem="Xve-qm-TG2" firstAttribute="top" secondItem="s02-xF-jcw" secondAttribute="top" constant="10" id="ODI-qq-l9d"/>
+                                    <constraint firstAttribute="trailing" secondItem="B0I-We-enK" secondAttribute="trailing" constant="15" id="YVx-iT-aV8"/>
+                                    <constraint firstItem="FQD-cm-1Zt" firstAttribute="top" secondItem="jQ8-q0-zka" secondAttribute="bottom" constant="20" id="eNo-WK-agT"/>
+                                    <constraint firstItem="jQ8-q0-zka" firstAttribute="leading" secondItem="Xve-qm-TG2" secondAttribute="trailing" constant="15" id="m6r-9U-6u4"/>
+                                    <constraint firstItem="FQD-cm-1Zt" firstAttribute="leading" secondItem="Xve-qm-TG2" secondAttribute="trailing" constant="15" id="o7S-le-ZLQ"/>
+                                    <constraint firstItem="jQ8-q0-zka" firstAttribute="top" secondItem="s02-xF-jcw" secondAttribute="top" constant="15" id="uIc-ke-OK6"/>
+                                    <constraint firstAttribute="bottom" secondItem="Xve-qm-TG2" secondAttribute="bottom" constant="10" id="uy4-5i-0O5"/>
+                                    <constraint firstAttribute="bottom" secondItem="B0I-We-enK" secondAttribute="bottom" constant="23" id="vJ5-aE-hhg"/>
+                                    <constraint firstItem="B0I-We-enK" firstAttribute="leading" secondItem="Xve-qm-TG2" secondAttribute="trailing" constant="15" id="wNw-Kw-5PY"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="imageView" destination="Xve-qm-TG2" id="KBf-Bw-Zgy"/>
                                     <outlet property="priceLabel" destination="FQD-cm-1Zt" id="95V-Og-weX"/>
+                                    <outlet property="segueButton" destination="B0I-We-enK" id="4wi-ms-r1n"/>
                                     <outlet property="titleLabel" destination="jQ8-q0-zka" id="mhA-Vj-Kzm"/>
                                 </connections>
                             </collectionViewCell>
@@ -156,20 +166,88 @@
             </objects>
             <point key="canvasLocation" x="156" y="177.66116941529236"/>
         </scene>
-        <!--View Controller-->
+        <!--Карта товара-->
         <scene sceneID="4U4-Cw-prK">
             <objects>
-                <viewController storyboardIdentifier="ProductDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uix-xm-XrG" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailsViewController" title="Карта товара" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uix-xm-XrG" customClass="ProductDetailsViewController" customModule="ProductListPresenter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jfG-oH-7Jt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9oH-yP-JGf">
+                                <rect key="frame" x="10" y="74" width="181" height="146"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="181" id="8uj-lC-HWz"/>
+                                    <constraint firstAttribute="height" constant="146" id="MJY-1B-wZr"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название товара" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYO-uD-SiN">
+                                <rect key="frame" x="201" y="74" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLx-o8-PuT">
+                                <rect key="frame" x="10" y="230" width="355" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFN-gc-JnQ">
+                                <rect key="frame" x="201" y="100" width="52" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuP-eF-1Ga">
+                                <rect key="frame" x="258" y="100" width="107" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация о товаре" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvt-i2-1ds">
+                                <rect key="frame" x="10" y="261" width="355" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="396" id="yR7-vR-p5e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9oH-yP-JGf" firstAttribute="top" secondItem="v6m-Gc-kBV" secondAttribute="top" constant="10" id="1K6-xw-Xv9"/>
+                            <constraint firstItem="MYO-uD-SiN" firstAttribute="leading" secondItem="9oH-yP-JGf" secondAttribute="trailing" constant="10" id="30N-Nu-z6A"/>
+                            <constraint firstItem="dvt-i2-1ds" firstAttribute="top" secondItem="HLx-o8-PuT" secondAttribute="bottom" constant="10" id="3D2-gV-N8J"/>
+                            <constraint firstItem="XFN-gc-JnQ" firstAttribute="leading" secondItem="9oH-yP-JGf" secondAttribute="trailing" constant="10" id="EGR-c1-sFV"/>
+                            <constraint firstItem="UuP-eF-1Ga" firstAttribute="leading" secondItem="XFN-gc-JnQ" secondAttribute="trailing" constant="5" id="EOc-dp-73x"/>
+                            <constraint firstItem="MYO-uD-SiN" firstAttribute="leading" secondItem="XFN-gc-JnQ" secondAttribute="trailing" constant="-52" id="Nij-EL-5Kf"/>
+                            <constraint firstItem="v6m-Gc-kBV" firstAttribute="trailing" secondItem="MYO-uD-SiN" secondAttribute="trailing" constant="10" id="Z79-FF-a5M"/>
+                            <constraint firstItem="dvt-i2-1ds" firstAttribute="trailing" secondItem="HLx-o8-PuT" secondAttribute="trailing" id="ZZJ-7t-kxY"/>
+                            <constraint firstItem="v6m-Gc-kBV" firstAttribute="trailing" secondItem="HLx-o8-PuT" secondAttribute="trailing" constant="10" id="hUE-NY-RN0"/>
+                            <constraint firstItem="UuP-eF-1Ga" firstAttribute="top" secondItem="MYO-uD-SiN" secondAttribute="bottom" constant="5" id="m0b-9W-sfc"/>
+                            <constraint firstItem="9oH-yP-JGf" firstAttribute="leading" secondItem="v6m-Gc-kBV" secondAttribute="leading" constant="10" id="oxr-1v-4C5"/>
+                            <constraint firstItem="v6m-Gc-kBV" firstAttribute="trailing" secondItem="UuP-eF-1Ga" secondAttribute="trailing" constant="10" id="pNG-uy-hvN"/>
+                            <constraint firstItem="MYO-uD-SiN" firstAttribute="top" secondItem="v6m-Gc-kBV" secondAttribute="top" constant="10" id="s8q-1v-AyG"/>
+                            <constraint firstItem="HLx-o8-PuT" firstAttribute="top" secondItem="9oH-yP-JGf" secondAttribute="bottom" constant="10" id="td4-4C-sNL"/>
+                            <constraint firstItem="XFN-gc-JnQ" firstAttribute="top" secondItem="MYO-uD-SiN" secondAttribute="bottom" constant="5" id="uUZ-Iv-52D"/>
+                            <constraint firstItem="HLx-o8-PuT" firstAttribute="leading" secondItem="v6m-Gc-kBV" secondAttribute="leading" constant="10" id="vIl-J0-p9V"/>
+                            <constraint firstItem="dvt-i2-1ds" firstAttribute="leading" secondItem="HLx-o8-PuT" secondAttribute="leading" id="zzU-h6-lO5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="v6m-Gc-kBV"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Карта товара" id="vww-Sp-H6g"/>
+                    <connections>
+                        <outlet property="productDescriptionLabel" destination="dvt-i2-1ds" id="fvP-sv-OKZ"/>
+                        <outlet property="productImageView" destination="9oH-yP-JGf" id="wbb-Fc-uFK"/>
+                        <outlet property="productNameLabel" destination="MYO-uD-SiN" id="9ip-JV-1qf"/>
+                        <outlet property="productPriceLabel" destination="UuP-eF-1Ga" id="wTF-lX-ZYT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsa-TI-bbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942" y="178"/>
+            <point key="canvasLocation" x="941.60000000000002" y="177.66116941529236"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hkQ-Wu-ckh">

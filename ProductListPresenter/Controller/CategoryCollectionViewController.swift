@@ -16,7 +16,7 @@ class CategoryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let categoryApi: CategoryApi = CategoryApi()
+        let categoryApi: CategoryApi = App.instance.categoryApi
         categoryApi.fetchAllCategories { (categories: [Category]) in
             self.categories = categories
             self.collectionView?.reloadData()
@@ -34,7 +34,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
         let category: Category = categories[indexPath.row]
-        
+
         // Конфигурируем интерфейс ячейки
         cell.imageView.layer.borderColor = UIColor.black.cgColor
         cell.imageView.layer.borderWidth = 1
@@ -52,7 +52,7 @@ class CategoryCollectionViewController: UICollectionViewController {
             with: url,
             placeholderImage: UIImage(named: "placeholder"),
             options: SDWebImageOptions.continueInBackground)
-        
+
         return cell
     }
 
@@ -64,16 +64,10 @@ class CategoryCollectionViewController: UICollectionViewController {
         productCollectionViewController.categoryId = category.id
         productCollectionViewController.categoryName = category.title
 
+        let backItem = UIBarButtonItem()
+        backItem.title = self.navigationItem.title
+        self.navigationItem.backBarButtonItem = backItem
+
         self.navigationController?.pushViewController(productCollectionViewController, animated: true)
     }
 }
-
-
-
-
-
-
-
-
-
-
