@@ -14,6 +14,7 @@ class ProductCellButton: UIButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        //TODO: use self.
         layer.cornerRadius = 5
     }
 

@@ -17,6 +17,7 @@ class CategoryApi: BaseApi {
         return Category(id: categoryId, title: title, imageUrl: imageUrl)
     }
 
+    //TODO: add categoryId as optional param
     func fetchAllCategories(completionHandler: @escaping ([Category]) -> Void) {
         super.sendGetRequest(relativeRequestPath: "/common/category/list", params: [], responseHandler: { response in
             var categories: [Category] = []

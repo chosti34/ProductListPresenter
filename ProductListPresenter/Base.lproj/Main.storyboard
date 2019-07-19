@@ -71,7 +71,7 @@
                     <navigationItem key="navigationItem" title="Каталог" id="Igg-rU-kFN">
                         <barButtonItem key="rightBarButtonItem" title="Все продукты" id="iTm-9x-aO6">
                             <connections>
-                                <segue destination="uWy-Nb-Ih8" kind="show" id="ejq-wn-GoE"/>
+                                <segue destination="uWy-Nb-Ih8" kind="show" identifier="ProductList" id="ejq-wn-GoE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

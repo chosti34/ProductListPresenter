@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 
+//TODO: rename CategoryListViewController, CategoriesViewController
 class CategoryCollectionViewController: UICollectionViewController {
 
     var categories: [Category] = []
@@ -17,9 +18,12 @@ class CategoryCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         let categoryApi: CategoryApi = App.instance.categoryApi
+
+        //TODO: show loader
         categoryApi.fetchAllCategories { (categories: [Category]) in
             self.categories = categories
             self.collectionView?.reloadData()
+            //TODO: hide loader
         }
 
         print("CategoryCollectionViewController - viewDidLoad ended")
@@ -31,10 +35,11 @@ class CategoryCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Достаем ячейку с категорией
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
         let category: Category = categories[indexPath.row]
 
+
+        //TODO: move to CategoryCollectionViewCell to constructor init?(coder aDecoder: NSCoder)
         // Конфигурируем интерфейс ячейки
         cell.imageView.layer.borderColor = UIColor.black.cgColor
         cell.imageView.layer.borderWidth = 1
@@ -57,6 +62,9 @@ class CategoryCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        self.performSegue(withIdentifier: "ProductList", sender: self)
+        //TODO: category hierarchy
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let productCollectionViewController = storyboard.instantiateViewController(withIdentifier: "ProductCollectionViewController") as! ProductCollectionViewController
 
@@ -64,6 +72,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         productCollectionViewController.categoryId = category.id
         productCollectionViewController.categoryName = category.title
 
+        //TODO: remove
         let backItem = UIBarButtonItem()
         backItem.title = self.navigationItem.title
         self.navigationItem.backBarButtonItem = backItem

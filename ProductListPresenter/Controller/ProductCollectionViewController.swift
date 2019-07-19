@@ -16,6 +16,8 @@ class ProductCollectionViewController: UICollectionViewController {
     var categoryId: Int? = nil
     var categoryName: String? = nil
 
+    var selectedProduct: Product? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -48,7 +50,7 @@ class ProductCollectionViewController: UICollectionViewController {
             as! ProductCollectionViewCell
 
         // Устанавливаем кнопке идентификатор товара (для перехода на карточку товара)
-        cell.segueButton.productId = indexPath.row
+        cell.segueButton.tag = indexPath.row
         let product = products[indexPath.row]
 
         // Заполняем ячейку данными модели
@@ -59,6 +61,7 @@ class ProductCollectionViewController: UICollectionViewController {
             cell.priceLabel.text = "Цена не установлена"
         }
 
+        //TODO: move to ProductCollectionViewCell
         // Оформление ячейки
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
@@ -72,14 +75,16 @@ class ProductCollectionViewController: UICollectionViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        //TODO: rename to destinationViewController
         let destination: ProductDetailsViewController = segue.destination as! ProductDetailsViewController
         let segueButton: ProductCellButton = sender as! ProductCellButton
         destination.product = products[segueButton.productId!]
 
+        //TODO: remove
         let backItem = UIBarButtonItem()
         backItem.title = self.navigationItem.title
         self.navigationItem.backBarButtonItem = backItem
     }
+
+    //TODO: add custom handler for segueButton touch, fill selectedProduct, call segue for product details
 }

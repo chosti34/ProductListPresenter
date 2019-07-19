@@ -33,7 +33,13 @@ class BaseApi: NSObject {
         return requestUrl + "&appKey=" + appKey
     }
 
+    //TODO: make function prepareUrl(relativeUrl)
+    //TODO: make function prepareParams(params)
+
     func sendGetRequest(relativeRequestPath: String, params: [String], responseHandler: @escaping (Any?) -> Void) {
+
+        //TODO: make params dictionary, not string
+        //TODO: use Alamofire.request(<#T##url: URLConvertible##URLConvertible#>, method: <#T##HTTPMethod#>, parameters: <#T##Parameters?#>)
         Alamofire.request(buildRequestUrl(relativeRequestPath, params)).validate().responseJSON { response in
             if !response.result.isSuccess {
                 responseHandler(nil)

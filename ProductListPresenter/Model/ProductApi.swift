@@ -9,7 +9,10 @@
 import UIKit
 
 class ProductApi: BaseApi {
+
+    //TODO: merge fetchProductsWithCategory and fetchAllProducts with optional categoryId
     func fetchProductsWithCategory(categoryId: Int, completionHandler: @escaping ([Product]) -> Void) {
+        //TODO: make params dictionary, not string
         self.sendGetRequest(relativeRequestPath: "/common/product/list", params: ["categoryId=\(categoryId)"], responseHandler: { response in
             self.fetchProducts(response, completionHandler)
         })
@@ -21,8 +24,11 @@ class ProductApi: BaseApi {
         })
     }
 
+    //TODO: parseProducts
     private func fetchProducts(_ response: Any?, _ completionHandler: ([Product]) -> Void) {
+        //TODO: use ObjectMapper to parse data
         var products: [Product] = []
+        //var products: [Product] = Mapper<Product>.mapArray(JSONObject: jsonRootObject["data"])
 
         if let jsonRootObject = response as? [String: Any] {
             if let jsonProductArray = jsonRootObject["data"] as? [[String: Any]] {

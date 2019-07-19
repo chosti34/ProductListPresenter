@@ -22,6 +22,7 @@ class ProductDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         assert(product != nil)
 
+        //TODO: use self
         productNameLabel.text = product!.title
         productPriceLabel.text = (product!.price == nil ? "не установлена" : String(product!.price!) + "$")
         productDescriptionLabel.text = (product!.description == nil) ? "Описание отсутствует" : product!.description!
