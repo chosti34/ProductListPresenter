@@ -9,21 +9,23 @@
 import UIKit
 import SDWebImage
 
-//TODO: rename CategoryListViewController, CategoriesViewController
-class CategoryCollectionViewController: UICollectionViewController {
+class CategoryListViewController: UICollectionViewController {
 
+    // Список категорий для отображения
     var categories: [Category] = []
+
+    // Выбранная категория для перехода на следующий экран
+    var selectedCategory: Category? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let categoryApi: CategoryApi = App.instance.categoryApi
-
-        //TODO: show loader
+        // TODO: show loader
         categoryApi.fetchAllCategories { (categories: [Category]) in
             self.categories = categories
             self.collectionView?.reloadData()
-            //TODO: hide loader
+            // TODO: hide loader
         }
 
         print("CategoryCollectionViewController - viewDidLoad ended")
@@ -34,19 +36,10 @@ class CategoryCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         // Достаем ячейку с категорией
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         let category: Category = categories[indexPath.row]
-
-
-        //TODO: move to CategoryCollectionViewCell to constructor init?(coder aDecoder: NSCoder)
-        // Конфигурируем интерфейс ячейки
-        cell.imageView.layer.borderColor = UIColor.black.cgColor
-        cell.imageView.layer.borderWidth = 1
-
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = 5
 
         // Устанавливаем заголовок категории
         cell.titleLabel.text = category.title
@@ -61,22 +54,22 @@ class CategoryCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    // TODO: category hierarchy
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+        self.selectedCategory = self.categories[indexPath.row]
         self.performSegue(withIdentifier: "ProductList", sender: self)
-        //TODO: category hierarchy
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let productCollectionViewController = storyboard.instantiateViewController(withIdentifier: "ProductCollectionViewController") as! ProductCollectionViewController
+    }
 
-        let category: Category = categories[indexPath.row]
-        productCollectionViewController.categoryId = category.id
-        productCollectionViewController.categoryName = category.title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let productListViewController = segue.destination as! ProductListViewController
 
-        //TODO: remove
-        let backItem = UIBarButtonItem()
-        backItem.title = self.navigationItem.title
-        self.navigationItem.backBarButtonItem = backItem
-
-        self.navigationController?.pushViewController(productCollectionViewController, animated: true)
+        // Если переход на экран списка товаров был вызван данным контроллером,
+        // тогда пользователем была выбрана конкретная категория. Иначе категория
+        // не определена, пользователю будут показаны товары всех категорий
+        if (sender as? CategoryListViewController) != nil {
+            assert(selectedCategory != nil)
+            productListViewController.category = self.selectedCategory
+        }
     }
 }

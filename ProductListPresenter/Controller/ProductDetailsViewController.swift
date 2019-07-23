@@ -12,6 +12,7 @@ import SDWebImage
 class ProductDetailsViewController: UIViewController {
 
     var product: Product? = nil
+
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
@@ -19,28 +20,30 @@ class ProductDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        assert(product != nil)
 
-        //TODO: use self
-        productNameLabel.text = product!.title
-        productPriceLabel.text = (product!.price == nil ? "не установлена" : String(product!.price!) + "$")
-        productDescriptionLabel.text = (product!.description == nil) ? "Описание отсутствует" : product!.description!
-        if (productDescriptionLabel.text!.isEmpty) {
-            productDescriptionLabel.text = "Описание отсутствует"
+        // Если был произведен переход на данный экран, self.product должен быть проинициализирован
+        assert(self.product != nil)
+
+        // Задаем название товара
+        self.productNameLabel.text = self.product!.title
+
+        // Задаем текст цены товара
+        self.productPriceLabel.text = (self.product!.price == nil ? "не установлена" : String(self.product!.price!) + "$")
+
+        // Задаем описание товара
+        self.productDescriptionLabel.text = (self.product!.description == nil) ? "Описание отсутствует" : self.product!.description!
+
+        // Описание в виде пустой строки не информативно
+        if (self.productDescriptionLabel.text!.isEmpty) {
+            self.productDescriptionLabel.text = "Описание отсутствует"
         }
 
-        let url: URL? = (product!.imageUrl == nil) ? nil : URL(string: product!.imageUrl!)
-        productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Задаем изображение продукта
+        let url: URL? = (self.product!.imageUrl == nil) ? nil : URL(string: self.product!.imageUrl!)
+        self.productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
     }
 
     override func viewWillLayoutSubviews() {
-        productDescriptionLabel.sizeToFit()
+        self.productDescriptionLabel.sizeToFit()
     }
-
 }

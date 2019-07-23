@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class BaseApi: NSObject {
+class BaseApi {
     let apiUrl: String = "http://ostest.whitetigersoft.ru/api"
     let appKey: String = "yx-1PU73oUj6gfk0hNyrNUwhWnmBRld7-SfKAU7Kg6Fpp43anR261KDiQ-MY4P2SRwH_cd4Py1OCY5jpPnY_Viyzja-s18njTLc0E7XcZFwwvi32zX-B91Sdwq1KeZ7m"
 
