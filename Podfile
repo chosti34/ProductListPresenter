@@ -8,5 +8,6 @@ target 'ProductListPresenter' do
   # Pods for ProductListPresenter
   pod 'Alamofire'
   pod 'SDWebImage'
+  pod 'ObjectMapper'
 
 end

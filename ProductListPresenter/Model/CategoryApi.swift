@@ -6,7 +6,7 @@
 //  Copyright © 2019 Timur. All rights reserved.
 //
 
-import UIKit
+import ObjectMapper
 
 class CategoryApi: BaseApi {
 
@@ -20,27 +20,12 @@ class CategoryApi: BaseApi {
     }
 
     func parseCategories(_ response: Any?, _ completionHandler: @escaping ([Category]) -> Void) {
-        var categories: [Category] = []
-
-        if let jsonRootObject = response as? [String: Any] {
-            if let jsonDataObject = jsonRootObject["data"] as? [String: Any] {
-                if let jsonCategoriesArray = jsonDataObject["categories"] as? [[String: Any]] {
-                    for categoryJson in jsonCategoriesArray {
-                        categories.append(self.parseCategoryJson(categoryJson))
-                    }
-                }
+        if let jsonRoot = response as? [String: Any] {
+            if let jsonData = jsonRoot["data"] as? [String: Any] {
+                // Можно поштучно: Mapper<Category>().map(JSON: categoryJson)
+                let categories: [Category]? = Mapper<Category>().mapArray(JSONObject: jsonData["categories"]!)
+                completionHandler(categories!)
             }
         }
-
-        completionHandler(categories)
-    }
-
-    func parseCategoryJson(_ jsonCategory: [String: Any]) -> Category {
-
-        let categoryId: Int = jsonCategory["categoryId"] as! Int
-        let title: String = jsonCategory["title"] as! String
-        let imageUrl: String? = jsonCategory["imageUrl"] as? String
-
-        return Category(id: categoryId, title: title, imageUrl: imageUrl)
     }
 }

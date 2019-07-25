@@ -6,16 +6,20 @@
 //  Copyright © 2019 Timur. All rights reserved.
 //
 
-import UIKit
+import ObjectMapper
 
-class Category {
+class Category: Mappable {
+
     var id: Int = 0
     var title: String = ""
     var imageUrl: String? = nil
-    
-    init(id: Int, title: String, imageUrl: String?) {
-        self.id = id
-        self.title = title
-        self.imageUrl = imageUrl
+
+    required init?(map: Map) {}
+
+    func mapping(map: Map) {
+        self.id       <- map["categoryId"]
+        self.title    <- map["title"]
+        self.imageUrl <- map["imageUrl"]
     }
+
 }

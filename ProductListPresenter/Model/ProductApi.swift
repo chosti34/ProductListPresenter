@@ -6,7 +6,7 @@
 //  Copyright © 2019 Timur. All rights reserved.
 //
 
-import UIKit
+import ObjectMapper
 
 class ProductApi: BaseApi {
 
@@ -20,37 +20,9 @@ class ProductApi: BaseApi {
     }
 
     private func parseProducts(_ response: Any?, _ completionHandler: ([Product]) -> Void) {
-        //TODO: use ObjectMapper to parse data
-        var products: [Product] = []
-        //var products: [Product] = Mapper<Product>.mapArray(JSONObject: jsonRootObject["data"])
-
-        if let jsonRootObject = response as? [String: Any] {
-            if let jsonProductArray = jsonRootObject["data"] as? [[String: Any]] {
-                for jsonProduct in jsonProductArray {
-                    products.append(self.parseProductJson(jsonProduct))
-                }
-            }
+        if let jsonRoot = response as? [String: Any] {
+            let products: [Product]? = Mapper<Product>().mapArray(JSONObject: jsonRoot["data"])
+            completionHandler(products!)
         }
-        
-        completionHandler(products)
-    }
-
-    private func parseProductJson(_ jsonProduct: [String: Any]) -> Product {
-        let productId: Int = jsonProduct["productId"] as! Int
-        let productDescription: String? = jsonProduct["productDescription"] as? String
-        let title: String = jsonProduct["title"] as! String
-        let rating: Int? = jsonProduct["rating"] as? Int
-        let imageUrl: String? = jsonProduct["imageUrl"] as? String
-        let price: Int? = jsonProduct["price"] as? Int
-        let availableForSale: Bool = jsonProduct["isAvailableForSale"] as! Bool
-        
-        return Product(
-            id: productId,
-            price: price,
-            title: title,
-            forSale: availableForSale,
-            description: productDescription,
-            imageUrl: imageUrl,
-            rating: rating)
     }
 }
