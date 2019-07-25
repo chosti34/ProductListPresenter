@@ -27,15 +27,9 @@ class ProductListViewController: UICollectionViewController {
         self.navigationItem.title = category?.title ?? "Все продукты"
 
         let productApi = App.instance.productApi
-        let productsParsedCallback = { (parsedProducts: [Product]) in
+        productApi.fetchProducts(categoryId: self.category?.id) { (parsedProducts: [Product]) in
             self.products = parsedProducts
             self.collectionView?.reloadData()
-        }
-
-        if self.category != nil {
-            productApi.fetchProductsWithCategory(categoryId: self.category!.id, completionHandler: productsParsedCallback)
-        } else {
-            productApi.fetchAllProducts(completionHandler: productsParsedCallback)
         }
 
         print("ProductCollectionViewController - viewDidLoad with category \(self.category?.id ?? -1) ended")

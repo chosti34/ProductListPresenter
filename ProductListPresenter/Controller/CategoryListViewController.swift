@@ -22,7 +22,7 @@ class CategoryListViewController: UICollectionViewController {
 
         let categoryApi: CategoryApi = App.instance.categoryApi
         // TODO: show loader
-        categoryApi.fetchAllCategories { (categories: [Category]) in
+        categoryApi.fetchCategories(parentId: nil) { (categories: [Category]) in
             self.categories = categories
             self.collectionView?.reloadData()
             // TODO: hide loader

@@ -6,46 +6,36 @@
 //  Copyright © 2019 Timur. All rights reserved.
 //
 
-import UIKit
 import Alamofire
 
 class BaseApi {
     let apiUrl: String = "http://ostest.whitetigersoft.ru/api"
     let appKey: String = "yx-1PU73oUj6gfk0hNyrNUwhWnmBRld7-SfKAU7Kg6Fpp43anR261KDiQ-MY4P2SRwH_cd4Py1OCY5jpPnY_Viyzja-s18njTLc0E7XcZFwwvi32zX-B91Sdwq1KeZ7m"
 
-    private func buildRequestUrl(_ relativeRequestPath: String, _ params: [String]) -> String {
-        var requestUrl = apiUrl + relativeRequestPath
-        if params.isEmpty {
-            requestUrl += ("?appKey=" + appKey)
-            return requestUrl
-        }
-
-        var firstParamTraversed: Bool = false
-        for param in params {
-            if !firstParamTraversed {
-                requestUrl += ("?" + param)
-                firstParamTraversed = true
-            } else {
-                requestUrl += ("&" + param)
-            }
-        }
-
-        return requestUrl + "&appKey=" + appKey
+    private func prepareParams(_ params: Dictionary<String, Any>) -> Dictionary<String, Any> {
+        var newParams = params
+        newParams["appKey"] = self.appKey
+        return newParams
     }
 
-    //TODO: make function prepareUrl(relativeUrl)
-    //TODO: make function prepareParams(params)
+    private func prepareUrl(_ relativeUrl: String) -> String {
+        if relativeUrl.isEmpty {
+            return apiUrl
+        }
+        return apiUrl + (relativeUrl.starts(with: "/") ? relativeUrl : "/" + relativeUrl)
+    }
 
-    func sendGetRequest(relativeRequestPath: String, params: [String], responseHandler: @escaping (Any?) -> Void) {
+    func sendRequest(relativeUrl: String, params: Dictionary<String, Any>, responseHandler: @escaping (Any?) -> Void) {
 
-        //TODO: make params dictionary, not string
-        //TODO: use Alamofire.request(<#T##url: URLConvertible##URLConvertible#>, method: <#T##HTTPMethod#>, parameters: <#T##Parameters?#>)
-        Alamofire.request(buildRequestUrl(relativeRequestPath, params)).validate().responseJSON { response in
-            if !response.result.isSuccess {
-                responseHandler(nil)
+        let url: String = prepareUrl(relativeUrl)
+        let newParams = prepareParams(params)
+
+        Alamofire.request(url, method: .get, parameters: newParams, encoding: URLEncoding.default, headers: nil).validate().responseJSON { (response: DataResponse<Any>) in
+            if response.result.isSuccess {
+                responseHandler(response.result.value)
                 return
             }
-            responseHandler(response.result.value)
+            responseHandler(nil)
         }
     }
 }

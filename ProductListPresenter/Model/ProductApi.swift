@@ -10,22 +10,16 @@ import UIKit
 
 class ProductApi: BaseApi {
 
-    //TODO: merge fetchProductsWithCategory and fetchAllProducts with optional categoryId
-    func fetchProductsWithCategory(categoryId: Int, completionHandler: @escaping ([Product]) -> Void) {
-        //TODO: make params dictionary, not string
-        self.sendGetRequest(relativeRequestPath: "/common/product/list", params: ["categoryId=\(categoryId)"], responseHandler: { response in
-            self.fetchProducts(response, completionHandler)
-        })
+    let relativeUrl = "common/product/list"
+
+    func fetchProducts(categoryId: Int?, completionHandler: @escaping ([Product]) -> Void) {
+        let params = (categoryId != nil) ? ["categoryId" : categoryId!] : [:]
+        super.sendRequest(relativeUrl: relativeUrl, params: params) { (response: Any?) in
+            self.parseProducts(response, completionHandler)
+        }
     }
 
-    func fetchAllProducts(completionHandler: @escaping ([Product]) -> Void) {
-        self.sendGetRequest(relativeRequestPath: "/common/product/list", params: [], responseHandler: { response in
-            self.fetchProducts(response, completionHandler)
-        })
-    }
-
-    //TODO: parseProducts
-    private func fetchProducts(_ response: Any?, _ completionHandler: ([Product]) -> Void) {
+    private func parseProducts(_ response: Any?, _ completionHandler: ([Product]) -> Void) {
         //TODO: use ObjectMapper to parse data
         var products: [Product] = []
         //var products: [Product] = Mapper<Product>.mapArray(JSONObject: jsonRootObject["data"])
@@ -40,7 +34,7 @@ class ProductApi: BaseApi {
         
         completionHandler(products)
     }
-    
+
     private func parseProductJson(_ jsonProduct: [String: Any]) -> Product {
         let productId: Int = jsonProduct["productId"] as! Int
         let productDescription: String? = jsonProduct["productDescription"] as? String
@@ -60,9 +54,3 @@ class ProductApi: BaseApi {
             rating: rating)
     }
 }
-
-
-
-
-
-
