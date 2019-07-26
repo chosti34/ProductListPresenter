@@ -20,15 +20,18 @@ class ProductListViewController: UICollectionViewController {
     // Продукт, выбранный пользователем для просмотра подробной информации
     var selectedProduct: Product? = nil
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Задаем заголовок категории
         self.navigationItem.title = category?.title ?? "Все продукты"
+        self.activityIndicator.startAnimating()
 
         let productApi = App.instance.productApi
         productApi.fetchProducts(categoryId: self.category?.id) { (parsedProducts: [Product]) in
             self.products = parsedProducts
+            self.activityIndicator.stopAnimating()
             self.collectionView?.reloadData()
         }
 
@@ -68,7 +71,6 @@ class ProductListViewController: UICollectionViewController {
         destinationViewController.product = self.selectedProduct
     }
 
-    // TODO: add custom handler for segueButton touch, fill selectedProduct, call segue for product details
     @IBAction func onProductDetailsButtonPress(_ sender: RoundedButton) {
         self.selectedProduct = self.products[sender.tag]
         self.performSegue(withIdentifier: "ProductDetailsSegue", sender: self)

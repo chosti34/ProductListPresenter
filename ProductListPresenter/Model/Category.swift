@@ -13,13 +13,15 @@ class Category: Mappable {
     var id: Int = 0
     var title: String = ""
     var imageUrl: String? = nil
+    var hasSubcategories: Bool = false
 
     required init?(map: Map) {}
 
     func mapping(map: Map) {
-        self.id       <- map["categoryId"]
-        self.title    <- map["title"]
-        self.imageUrl <- map["imageUrl"]
+        self.id               <- map["categoryId"]
+        self.title            <- map["title"]
+        self.imageUrl         <- map["imageUrl"]
+        self.hasSubcategories <- map["hasSubcategories"]
     }
 
 }

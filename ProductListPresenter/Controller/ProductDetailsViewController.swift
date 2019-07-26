@@ -17,6 +17,7 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productPriceLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productDescriptionLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,10 @@ class ProductDetailsViewController: UIViewController {
         // Задаем изображение продукта
         let url: URL? = (self.product!.imageUrl == nil) ? nil : URL(string: self.product!.imageUrl!)
         self.productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        //self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 
     override func viewWillLayoutSubviews() {
