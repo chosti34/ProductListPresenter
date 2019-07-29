@@ -12,9 +12,14 @@ class ProductApi: BaseApi {
 
     let relativeUrl = "common/product/list"
 
-    func fetchProducts(categoryId: Int?, completionHandler: @escaping ([Product]) -> Void) {
-        let params = (categoryId != nil) ? ["categoryId" : categoryId!] : [:]
-        super.sendRequest(relativeUrl: relativeUrl, params: params) { (response: Any?) in
+    private func buildParams(_ categoryId: Int?, _ offset: Int) -> Dictionary<String, Any> {
+        var params = (categoryId != nil) ? ["categoryId" : categoryId!] : [:]
+        params["offset"] = offset
+        return params
+    }
+
+    func fetchProducts(categoryId: Int?, offset: Int = 0, completionHandler: @escaping ([Product]) -> Void) {
+        super.sendRequest(relativeUrl: relativeUrl, params: buildParams(categoryId, offset)) { (response: Any?) in
             self.parseProducts(response, completionHandler)
         }
     }

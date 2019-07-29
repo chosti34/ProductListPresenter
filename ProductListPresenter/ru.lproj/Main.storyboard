@@ -167,6 +167,27 @@
                                     <outlet property="titleLabel" destination="jQ8-q0-zka" id="mhA-Vj-Kzm"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoadingCell" id="h3F-1C-36a">
+                                <rect key="frame" x="38" y="188" width="299" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="299" height="53"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vI5-rb-An0">
+                                            <rect key="frame" x="85.5" y="10.5" width="128" height="32"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="vI5-rb-An0" firstAttribute="centerY" secondItem="h3F-1C-36a" secondAttribute="centerY" id="ArM-yI-GRc"/>
+                                    <constraint firstItem="vI5-rb-An0" firstAttribute="centerX" secondItem="h3F-1C-36a" secondAttribute="centerX" id="dty-7m-TPW"/>
+                                </constraints>
+                                <size key="customSize" width="299" height="53"/>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="uWy-Nb-Ih8" id="Nsc-7J-cOm"/>
