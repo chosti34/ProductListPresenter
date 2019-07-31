@@ -31,6 +31,7 @@ class BaseApi {
         let newParams = prepareParams(params)
 
         Alamofire.request(url, method: .get, parameters: newParams, encoding: URLEncoding.default, headers: nil).validate().responseJSON { (response: DataResponse<Any>) in
+            //TODO: refactor this. Extract jsonRoot["data"] as Any here and return via responseHandler
             if response.result.isSuccess {
                 responseHandler(response.result.value)
                 return

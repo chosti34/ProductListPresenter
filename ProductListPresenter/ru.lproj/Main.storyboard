@@ -82,11 +82,20 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="sF2-Vw-Ikj" id="Rou-bU-CKD"/>
+                        <segue destination="pCL-WB-3Rr" kind="show" id="gWw-dJ-MIa"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQq-Bb-M9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-615.20000000000005" y="177.66116941529236"/>
+        </scene>
+        <!--CategoryListViewController-->
+        <scene sceneID="Mkv-NN-GWp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CategoryListViewController" id="pCL-WB-3Rr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3I1-fv-HNK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-615" y="-297"/>
         </scene>
         <!--Все продукты-->
         <scene sceneID="B5N-mr-owk">

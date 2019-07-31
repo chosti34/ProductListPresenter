@@ -20,11 +20,9 @@ class ProductListViewController: UICollectionViewController {
     // Продукт, выбранный пользователем для просмотра подробной информации
     var selectedProduct: Product? = nil
 
-    // Когда пользователь пролистал список до конца, программа сделает запрос
-    // к серверу за новой порцией данных
-    var fetchingProducts: Bool = false
-    var fetchingEndReached: Bool = false
+    var dataProvider: ProductDataProvider = ProductDataProvider()
 
+    //TODO: use MBProgressHud
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
@@ -33,11 +31,8 @@ class ProductListViewController: UICollectionViewController {
         self.navigationItem.title = category?.title ?? "Все продукты"
         self.activityIndicator.startAnimating()
 
-        App.instance.productApi.fetchProducts(categoryId: self.category?.id) { (parsedProducts: [Product]) in
-            self.products = parsedProducts
-            self.activityIndicator.stopAnimating()
-            self.collectionView?.reloadData()
-        }
+        self.dataProvider.delegate = self
+        self.dataProvider.fetchProducts(self.category?.id)
 
         print("ProductCollectionViewController - viewDidLoad with category \(self.category?.id ?? -1) ended")
     }
@@ -81,23 +76,23 @@ class ProductListViewController: UICollectionViewController {
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
+        let maxScrollingOffsetY = scrollView.contentSize.height - scrollView.frame.height
 
-        if (self.products.count != 0) && (offsetY > contentHeight - scrollView.frame.height) && !self.fetchingProducts && !self.fetchingEndReached {
-            self.fetchMoreProducts()
-            print("offsetY = " + "\(offsetY)")
-            print("contentHeight - frameHeight = " + "\(contentHeight - scrollView.frame.height)")
+        if offsetY >= maxScrollingOffsetY {
+            self.dataProvider.fetchProducts(self.category?.id, self.products.count)
         }
     }
+}
 
-    private func fetchMoreProducts() {
-        self.fetchingProducts = true
+extension ProductListViewController: ProductDataProviderDelegate {
+    func dataProvider(_ dataProvider: ProductDataProvider, itemsLoaded items: [Product]) {
 
-        App.instance.productApi.fetchProducts(categoryId: self.category?.id, offset: self.products.count) { (parsedProducts: [Product]) in
-            self.fetchingEndReached = parsedProducts.isEmpty
-            self.products.append(contentsOf: parsedProducts)
-            self.collectionView?.reloadData()
-            self.fetchingProducts = false
+        print("products loaded")
+
+        self.products.append(contentsOf: items)
+        if self.activityIndicator.isAnimating {
+            self.activityIndicator.stopAnimating()
         }
+        self.collectionView?.reloadData()
     }
 }

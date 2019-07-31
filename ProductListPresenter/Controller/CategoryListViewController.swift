@@ -31,16 +31,22 @@ class CategoryListViewController: UICollectionViewController {
             self.navigationItem.title = "Подкатегории \"\(self.parentCategory!.title)\""
         }
 
+        //TODO: extract from here
         self.activityIndicator.startAnimating()
-
-        let categoryApi: CategoryApi = App.instance.categoryApi
-        categoryApi.fetchCategories(parentId: self.parentCategory?.id) { (categories: [Category]) in
+        App.instance.categoryApi.fetchCategories(parentId: self.parentCategory?.id) { (categories: [Category]) in
             self.categories = categories
             self.activityIndicator.stopAnimating()
             self.collectionView?.reloadData()
         }
+        //TODO: extract to here to method reloadData
+        //TODO: call reloadData in viewWillAppear
 
         print("CategoryCollectionViewController - viewDidLoad ended")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("categories viewWillAppear")
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -70,6 +76,7 @@ class CategoryListViewController: UICollectionViewController {
         self.selectedCategory = self.categories[indexPath.row]
 
         if self.selectedCategory!.hasSubcategories {
+            //TODO: try use segue via Storyboard Reference to itself
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let categoryListViewController = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController")
             let segue = UIStoryboardSegue(identifier: "SegueToItself", source: self, destination: categoryListViewController, performHandler: {
@@ -83,6 +90,9 @@ class CategoryListViewController: UICollectionViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let categoryListViewController = segue.destination as? CategoryListViewController {
+//            categoryListViewController.parentCategory = self.selectedCategory
+//        }
         if segue.identifier == "SegueToItself" {
             let categoryListViewController = segue.destination as! CategoryListViewController
             categoryListViewController.parentCategory = self.selectedCategory
