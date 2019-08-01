@@ -20,12 +20,10 @@ class CategoryApi: BaseApi {
     }
 
     func parseCategories(_ response: Any?, _ completionHandler: @escaping ([Category]) -> Void) {
-        if let jsonRoot = response as? [String: Any] {
-            if let jsonData = jsonRoot["data"] as? [String: Any] {
-                // Можно поштучно: Mapper<Category>().map(JSON: categoryJson)
-                let categories: [Category]? = Mapper<Category>().mapArray(JSONObject: jsonData["categories"]!)
-                completionHandler(categories!)
-            }
+        if let jsonData = response as? [String: Any] {
+            // Можно поштучно: Mapper<Category>().map(JSON: categoryJson)
+            let categories: [Category]? = Mapper<Category>().mapArray(JSONObject: jsonData["categories"]!)
+            completionHandler(categories!)
         }
     }
 }

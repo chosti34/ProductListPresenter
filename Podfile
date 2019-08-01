@@ -9,5 +9,6 @@ target 'ProductListPresenter' do
   pod 'Alamofire'
   pod 'SDWebImage'
   pod 'ObjectMapper'
+  pod 'MBProgressHUD', '~> 1.1.0'
 
 end

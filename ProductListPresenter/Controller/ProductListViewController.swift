@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import MBProgressHUD
 
 class ProductListViewController: UICollectionViewController {
 
@@ -22,14 +22,13 @@ class ProductListViewController: UICollectionViewController {
 
     var dataProvider: ProductDataProvider = ProductDataProvider()
 
-    //TODO: use MBProgressHud
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var progressHUD: MBProgressHUD? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.title = category?.title ?? "Все продукты"
-        self.activityIndicator.startAnimating()
+        self.progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
 
         self.dataProvider.delegate = self
         self.dataProvider.fetchProducts(self.category?.id)
@@ -90,9 +89,7 @@ extension ProductListViewController: ProductDataProviderDelegate {
         print("products loaded")
 
         self.products.append(contentsOf: items)
-        if self.activityIndicator.isAnimating {
-            self.activityIndicator.stopAnimating()
-        }
+        self.progressHUD?.hide(animated: true)
         self.collectionView?.reloadData()
     }
 }

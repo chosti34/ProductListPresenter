@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import MBProgressHUD
 
 class CategoryListViewController: UICollectionViewController {
 
@@ -20,7 +21,7 @@ class CategoryListViewController: UICollectionViewController {
     // Возможно категории списка являются подкатегориями
     var parentCategory: Category? = nil
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var progressHUD: MBProgressHUD? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,22 +32,23 @@ class CategoryListViewController: UICollectionViewController {
             self.navigationItem.title = "Подкатегории \"\(self.parentCategory!.title)\""
         }
 
-        //TODO: extract from here
-        self.activityIndicator.startAnimating()
-        App.instance.categoryApi.fetchCategories(parentId: self.parentCategory?.id) { (categories: [Category]) in
-            self.categories = categories
-            self.activityIndicator.stopAnimating()
-            self.collectionView?.reloadData()
-        }
-        //TODO: extract to here to method reloadData
-        //TODO: call reloadData in viewWillAppear
-
         print("CategoryCollectionViewController - viewDidLoad ended")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("categories viewWillAppear")
+
+        if self.progressHUD != nil {
+            self.progressHUD?.hide(animated: true)
+        }
+
+        self.progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        App.instance.categoryApi.fetchCategories(parentId: self.parentCategory?.id) { (categories: [Category]) in
+            self.categories = categories
+            self.progressHUD?.hide(animated: true)
+            self.collectionView?.reloadData()
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -76,30 +78,16 @@ class CategoryListViewController: UICollectionViewController {
         self.selectedCategory = self.categories[indexPath.row]
 
         if self.selectedCategory!.hasSubcategories {
-            //TODO: try use segue via Storyboard Reference to itself
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let categoryListViewController = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController")
-            let segue = UIStoryboardSegue(identifier: "SegueToItself", source: self, destination: categoryListViewController, performHandler: {
-                self.navigationController?.show(categoryListViewController, sender: self)
-            })
-            self.prepare(for: segue, sender: self)
-            segue.perform()
+            self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
         } else {
-            self.performSegue(withIdentifier: "ProductListSegue", sender: self)
+            self.performSegue(withIdentifier: "CategoryListToProductListSegue", sender: self)
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let categoryListViewController = segue.destination as? CategoryListViewController {
-//            categoryListViewController.parentCategory = self.selectedCategory
-//        }
-        if segue.identifier == "SegueToItself" {
-            let categoryListViewController = segue.destination as! CategoryListViewController
+        if let categoryListViewController = segue.destination as? CategoryListViewController {
             categoryListViewController.parentCategory = self.selectedCategory
-        }
-        if segue.identifier == "ProductListSegue" {
-            let productListViewController = segue.destination as! ProductListViewController
-
+        } else if let productListViewController = segue.destination as? ProductListViewController {
             // Если переход на экран списка товаров был вызван данным контроллером,
             // тогда пользователем была выбрана конкретная категория. Иначе категория
             // не определена, пользователю будут показаны товары всех категорий

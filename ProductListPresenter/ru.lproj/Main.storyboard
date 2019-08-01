@@ -29,11 +29,6 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="10" minY="20" maxX="10" maxY="20"/>
                         </collectionViewFlowLayout>
-                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="sF2-Vw-Ikj">
-                            <rect key="frame" x="0.0" y="-64" width="375" height="667"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="color" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCell" id="uZo-h4-NHJ" customClass="CategoryCell" customModule="ProductListPresenter" customModuleProvider="target">
                                 <rect key="frame" x="14.5" y="20" width="346" height="255"/>
@@ -76,13 +71,12 @@
                     <navigationItem key="navigationItem" title="Каталог" id="Igg-rU-kFN">
                         <barButtonItem key="rightBarButtonItem" title="Все продукты" id="iTm-9x-aO6">
                             <connections>
-                                <segue destination="uWy-Nb-Ih8" kind="show" identifier="ProductListSegue" id="ejq-wn-GoE"/>
+                                <segue destination="uWy-Nb-Ih8" kind="show" identifier="CategoryListToProductListSegue" id="ejq-wn-GoE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="sF2-Vw-Ikj" id="Rou-bU-CKD"/>
-                        <segue destination="pCL-WB-3Rr" kind="show" id="gWw-dJ-MIa"/>
+                        <segue destination="pCL-WB-3Rr" kind="show" identifier="CategoryListToItselfSegue" id="gWw-dJ-MIa"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQq-Bb-M9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -95,7 +89,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CategoryListViewController" id="pCL-WB-3Rr" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I1-fv-HNK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-615" y="-297"/>
+            <point key="canvasLocation" x="-616" y="624"/>
         </scene>
         <!--Все продукты-->
         <scene sceneID="B5N-mr-owk">
@@ -111,11 +105,6 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
-                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="9iK-do-eaL">
-                            <rect key="frame" x="0.0" y="-64" width="375" height="667"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="color" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="s02-xF-jcw" customClass="ProductCell" customModule="ProductListPresenter" customModuleProvider="target">
                                 <rect key="frame" x="21" y="20" width="333" height="158"/>
@@ -176,27 +165,6 @@
                                     <outlet property="titleLabel" destination="jQ8-q0-zka" id="mhA-Vj-Kzm"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoadingCell" id="h3F-1C-36a">
-                                <rect key="frame" x="38" y="188" width="299" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="299" height="53"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Загрузка..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vI5-rb-An0">
-                                            <rect key="frame" x="85.5" y="10.5" width="128" height="32"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="vI5-rb-An0" firstAttribute="centerY" secondItem="h3F-1C-36a" secondAttribute="centerY" id="ArM-yI-GRc"/>
-                                    <constraint firstItem="vI5-rb-An0" firstAttribute="centerX" secondItem="h3F-1C-36a" secondAttribute="centerX" id="dty-7m-TPW"/>
-                                </constraints>
-                                <size key="customSize" width="299" height="53"/>
-                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="uWy-Nb-Ih8" id="Nsc-7J-cOm"/>
@@ -205,13 +173,12 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Все продукты" id="OhE-9K-imA"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="9iK-do-eaL" id="anp-gb-jHO"/>
                         <segue destination="Uix-xm-XrG" kind="show" identifier="ProductDetailsSegue" id="WjM-cn-siZ"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AjF-hT-8H9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="177.66116941529236"/>
+            <point key="canvasLocation" x="177" y="178"/>
         </scene>
         <!--Карта товара-->
         <scene sceneID="4U4-Cw-prK">

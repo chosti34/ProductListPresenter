@@ -25,8 +25,8 @@ class ProductApi: BaseApi {
     }
 
     private func parseProducts(_ response: Any?, _ completionHandler: ([Product]) -> Void) {
-        if let jsonRoot = response as? [String: Any] {
-            let products: [Product]? = Mapper<Product>().mapArray(JSONObject: jsonRoot["data"])
+        if let jsonData = response as? [[String: Any]] {
+            let products: [Product]? = Mapper<Product>().mapArray(JSONObject: jsonData)
             completionHandler(products!)
         }
     }

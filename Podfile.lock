@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - MBProgressHUD (1.1.0)
   - ObjectMapper (3.5.1)
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
@@ -7,20 +8,23 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - MBProgressHUD (~> 1.1.0)
   - ObjectMapper
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - MBProgressHUD
     - ObjectMapper
     - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
 
-PODFILE CHECKSUM: 1359f0f057e05bfce65f11f71094993eab812c7d
+PODFILE CHECKSUM: a29f7a536d9d28ad6cb7da4dfabad5179363fe9b
 
 COCOAPODS: 1.7.4

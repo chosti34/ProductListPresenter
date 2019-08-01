@@ -39,10 +39,4 @@ class ProductDataProvider: NSObject {
             self.delegate?.dataProvider(self, itemsLoaded: parsedProducts)
         }
     }
-
-    //TODO: declare delegate
-    //TODO: move products to this class
-    //TODO: move fetchingProducts, fetchingEndReached to this class
-    //TODO: add method fetchMore
-    //TODO: notify controller via delegate about new products
 }
