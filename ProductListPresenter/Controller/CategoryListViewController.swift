@@ -59,10 +59,17 @@ class CategoryListViewController: UICollectionViewController {
 
         // Достаем ячейку с категорией
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+
+        // Задаем кнопке в ячейке индекс продукта (сохраняем в тег)
+        cell.segueButton.tag = indexPath.row
+
         let category: Category = categories[indexPath.row]
 
         // Устанавливаем заголовок категории
         cell.titleLabel.text = category.title
+
+        // Устанавливаем информацию о подкатегориях
+        cell.subcategoriesInfoLabel.text = category.hasSubcategories ? "Есть подкатегории" : "Нет подкатегорий"
 
         // Устанавливаем изображение категории
         let url: URL? = (category.imageUrl != nil) ? URL(string: category.imageUrl!) : nil
@@ -95,6 +102,16 @@ class CategoryListViewController: UICollectionViewController {
                 assert(selectedCategory != nil)
                 productListViewController.category = self.selectedCategory
             }
+        }
+    }
+
+    @IBAction func onCategoryDetailsButtonPress(_ sender: UIButton) {
+        self.selectedCategory = self.categories[sender.tag]
+
+        if self.selectedCategory!.hasSubcategories {
+            self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
+        } else {
+            self.performSegue(withIdentifier: "CategoryListToProductListSegue", sender: self)
         }
     }
 }

@@ -47,6 +47,7 @@ class ProductListViewController: UICollectionViewController {
 
         // Задаем кнопке в ячейке индекс продукта (сохраняем в тег)
         cell.segueButton.tag = indexPath.row
+
         let product = products[indexPath.row]
 
         // Задаем заголовок ячейки продукта
@@ -68,9 +69,14 @@ class ProductListViewController: UICollectionViewController {
         destinationViewController.product = self.selectedProduct
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedProduct = self.products[indexPath.row]
+        self.performSegue(withIdentifier: "ProductListToProductDetailsSegue", sender: self)
+    }
+
     @IBAction func onProductDetailsButtonPress(_ sender: RoundedButton) {
         self.selectedProduct = self.products[sender.tag]
-        self.performSegue(withIdentifier: "ProductDetailsSegue", sender: self)
+        self.performSegue(withIdentifier: "ProductListToProductDetailsSegue", sender: self)
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -12,6 +12,8 @@ class CategoryCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subcategoriesInfoLabel: UILabel!
+    @IBOutlet weak var segueButton: RoundedButton!
 
     // self.imageView равен nil в момент вызова конструктора,
     // поэтому используется метод awakeFromNib
