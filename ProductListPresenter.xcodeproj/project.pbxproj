@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3952476522CFB61E003450AE /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952476422CFB61E003450AE /* Product.swift */; };
 		395DAE2922D0C7F300FF11E7 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DAE2822D0C7F300FF11E7 /* CategoryListViewController.swift */; };
-		395DAE2B22D0C83600FF11E7 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DAE2A22D0C83600FF11E7 /* CategoryCell.swift */; };
+		395DAE2B22D0C83600FF11E7 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DAE2A22D0C83600FF11E7 /* CategoryCollectionViewCell.swift */; };
 		395DAE2D22D0D01E00FF11E7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DAE2C22D0D01E00FF11E7 /* Category.swift */; };
 		3968734622CF536300D98EA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3968734522CF536300D98EA0 /* AppDelegate.swift */; };
 		3968734822CF536300D98EA0 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3968734722CF536300D98EA0 /* ProductListViewController.swift */; };
@@ -17,7 +17,7 @@
 		3968734D22CF536300D98EA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3968734C22CF536300D98EA0 /* Assets.xcassets */; };
 		3968735022CF536300D98EA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3968734E22CF536300D98EA0 /* LaunchScreen.storyboard */; };
 		3968735822CF546800D98EA0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3968735722CF546800D98EA0 /* .gitignore */; };
-		3968735A22CF57E100D98EA0 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3968735922CF57E100D98EA0 /* ProductCell.swift */; };
+		3968735A22CF57E100D98EA0 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3968735922CF57E100D98EA0 /* ProductCollectionViewCell.swift */; };
 		3972974622DB47C100B98059 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972974522DB47C100B98059 /* ProductDetailsViewController.swift */; };
 		3972974822DB4DFD00B98059 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3972974722DB4DFD00B98059 /* RoundedButton.swift */; };
 		3975CB7622DA806700F8E877 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3975CB7522DA806700F8E877 /* BaseApi.swift */; };
@@ -32,7 +32,7 @@
 		0151E46B5C62207AAB1C6DC1 /* Pods_ProductListPresenter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProductListPresenter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3952476422CFB61E003450AE /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		395DAE2822D0C7F300FF11E7 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
-		395DAE2A22D0C83600FF11E7 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		395DAE2A22D0C83600FF11E7 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		395DAE2C22D0D01E00FF11E7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		3968734222CF536300D98EA0 /* ProductListPresenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductListPresenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3968734522CF536300D98EA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		3968734C22CF536300D98EA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3968735122CF536300D98EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3968735722CF546800D98EA0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		3968735922CF57E100D98EA0 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		3968735922CF57E100D98EA0 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		3972974522DB47C100B98059 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		3972974722DB4DFD00B98059 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		3975CB7522DA806700F8E877 /* BaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
@@ -124,8 +124,8 @@
 		3968735C22CF5BB900D98EA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3968735922CF57E100D98EA0 /* ProductCell.swift */,
-				395DAE2A22D0C83600FF11E7 /* CategoryCell.swift */,
+				3968735922CF57E100D98EA0 /* ProductCollectionViewCell.swift */,
+				395DAE2A22D0C83600FF11E7 /* CategoryCollectionViewCell.swift */,
 				3972974722DB4DFD00B98059 /* RoundedButton.swift */,
 			);
 			path = View;
@@ -301,10 +301,10 @@
 				39CF4B9D22F034EE00A8CFBB /* ProductDataProvider.swift in Sources */,
 				3952476522CFB61E003450AE /* Product.swift in Sources */,
 				3968734622CF536300D98EA0 /* AppDelegate.swift in Sources */,
-				395DAE2B22D0C83600FF11E7 /* CategoryCell.swift in Sources */,
+				395DAE2B22D0C83600FF11E7 /* CategoryCollectionViewCell.swift in Sources */,
 				3975CB7622DA806700F8E877 /* BaseApi.swift in Sources */,
 				3972974822DB4DFD00B98059 /* RoundedButton.swift in Sources */,
-				3968735A22CF57E100D98EA0 /* ProductCell.swift in Sources */,
+				3968735A22CF57E100D98EA0 /* ProductCollectionViewCell.swift in Sources */,
 				395DAE2D22D0D01E00FF11E7 /* Category.swift in Sources */,
 				3975CB7A22DA90E300F8E877 /* ProductApi.swift in Sources */,
 				3975CB7822DA83F400F8E877 /* CategoryApi.swift in Sources */,

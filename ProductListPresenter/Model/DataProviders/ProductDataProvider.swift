@@ -14,29 +14,32 @@ protocol ProductDataProviderDelegate {
 }
 
 class ProductDataProvider: NSObject {
+    // TODO: use UserDefaults
 
     var delegate: ProductDataProviderDelegate? = nil
 
-    var fetching: Bool = false
-    var noMoreToFetch: Bool = false
+    var products: [Product] = []
+    var categoryId: Int? = nil
 
-    func fetchProducts(_ categoryId: Int?, _ offset: Int = 0) {
+    var isLoadingPortion: Bool = false
+    var loadedUpToLastProduct: Bool = false
 
-        print("trying to fetch...")
-        if self.fetching || self.noMoreToFetch {
+    func loadProducts(offset: Int = 0) {
+
+        print("trying to load...")
+        if self.isLoadingPortion || self.loadedUpToLastProduct {
             return
         }
 
         assert(delegate != nil)
-        self.fetching = true
+        self.isLoadingPortion = true
 
-        App.instance.productApi.fetchProducts(categoryId: categoryId, offset: offset) { (parsedProducts: [Product]) in
-
-            print("fetched \(parsedProducts.count) products")
-
-            self.fetching = false
-            self.noMoreToFetch = parsedProducts.isEmpty
-            self.delegate?.dataProvider(self, itemsLoaded: parsedProducts)
+        App.instance.productApi.fetchProducts(categoryId: self.categoryId, offset: offset) { (products: [Product]) in
+            print("loaded \(products.count) products")
+            self.products.append(contentsOf: products)
+            self.isLoadingPortion = false
+            self.loadedUpToLastProduct = products.isEmpty
+            self.delegate?.dataProvider(self, itemsLoaded: products)
         }
     }
 }

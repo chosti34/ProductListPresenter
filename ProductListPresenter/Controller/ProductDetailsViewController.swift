@@ -44,10 +44,6 @@ class ProductDetailsViewController: UIViewController {
         self.productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        //self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-    }
-
     override func viewWillLayoutSubviews() {
         self.productDescriptionLabel.sizeToFit()
     }

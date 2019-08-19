@@ -10,7 +10,9 @@ import UIKit
 import SDWebImage
 import MBProgressHUD
 
-class CategoryListViewController: UICollectionViewController {
+class CategoryListViewController: UIViewController {
+
+    @IBOutlet var collectionView: UICollectionView!
 
     // Список категорий для отображения
     var categories: [Category] = []
@@ -51,14 +53,40 @@ class CategoryListViewController: UICollectionViewController {
         }
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let categoryListViewController = segue.destination as? CategoryListViewController {
+            categoryListViewController.parentCategory = self.selectedCategory
+        } else if let productListViewController = segue.destination as? ProductListViewController {
+            // Если переход на экран списка товаров был вызван данным контроллером,
+            // тогда пользователем была выбрана конкретная категория. Иначе категория
+            // не определена, пользователю будут показаны товары всех категорий
+            if (sender as? CategoryListViewController) != nil {
+                assert(selectedCategory != nil)
+                productListViewController.category = self.selectedCategory
+            }
+        }
+    }
+
+    @IBAction func onCategoryDetailsButtonPress(_ sender: UIButton) {
+        self.selectedCategory = self.categories[sender.tag]
+
+        if self.selectedCategory!.hasSubcategories {
+            self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
+        } else {
+            self.performSegue(withIdentifier: "CategoryListToProductListSegue", sender: self)
+        }
+    }
+}
+
+extension CategoryListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.categories.count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         // Достаем ячейку с категорией
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
 
         // Задаем кнопке в ячейке индекс продукта (сохраняем в тег)
         cell.segueButton.tag = indexPath.row
@@ -81,32 +109,8 @@ class CategoryListViewController: UICollectionViewController {
         return cell
     }
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedCategory = self.categories[indexPath.row]
-
-        if self.selectedCategory!.hasSubcategories {
-            self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
-        } else {
-            self.performSegue(withIdentifier: "CategoryListToProductListSegue", sender: self)
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let categoryListViewController = segue.destination as? CategoryListViewController {
-            categoryListViewController.parentCategory = self.selectedCategory
-        } else if let productListViewController = segue.destination as? ProductListViewController {
-            // Если переход на экран списка товаров был вызван данным контроллером,
-            // тогда пользователем была выбрана конкретная категория. Иначе категория
-            // не определена, пользователю будут показаны товары всех категорий
-            if (sender as? CategoryListViewController) != nil {
-                assert(selectedCategory != nil)
-                productListViewController.category = self.selectedCategory
-            }
-        }
-    }
-
-    @IBAction func onCategoryDetailsButtonPress(_ sender: UIButton) {
-        self.selectedCategory = self.categories[sender.tag]
 
         if self.selectedCategory!.hasSubcategories {
             self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
