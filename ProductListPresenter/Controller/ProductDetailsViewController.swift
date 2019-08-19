@@ -32,7 +32,7 @@ class ProductDetailsViewController: UIViewController {
         self.productPriceLabel.text = (self.product!.price == nil ? "не установлена" : String(self.product!.price!) + "$")
 
         // Задаем описание товара
-        self.productDescriptionLabel.text = (self.product!.description == nil) ? "Описание отсутствует" : self.product!.description!
+        self.productDescriptionLabel.text = (self.product!.desc == nil) ? "Описание отсутствует" : self.product!.desc!
 
         // Описание в виде пустой строки не информативно
         if (self.productDescriptionLabel.text!.isEmpty) {
@@ -46,5 +46,28 @@ class ProductDetailsViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         self.productDescriptionLabel.sizeToFit()
+    }
+
+    @IBAction func onAddToCartButtonPress(_ sender: RoundedButton) {
+        assert(self.product != nil)
+        App.instance.shoppingCart.addProduct(product: self.product!)
+
+        let alertController = UIAlertController(title: "Товар '\(self.product!.title)' добавлен в корзину", message: nil, preferredStyle: .alert)
+
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default, handler: nil)
+        alertController.addAction(continueAction)
+
+        let gotoShoppingCartViewAction = UIAlertAction(title: "Посмотреть корзину", style: .default) { (action: UIAlertAction) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let shoppingCartViewController = storyboard.instantiateViewController(withIdentifier: "ShoppingCartViewController")
+            let segue = UIStoryboardSegue(identifier: "ProductDetailsToShoppingCartSegue", source: self, destination: shoppingCartViewController, performHandler: {
+                self.navigationController?.show(shoppingCartViewController, sender: self)
+            })
+            self.prepare(for: segue, sender: self)
+            segue.perform()
+        }
+        alertController.addAction(gotoShoppingCartViewAction)
+
+        self.present(alertController, animated: true, completion: nil)
     }
 }

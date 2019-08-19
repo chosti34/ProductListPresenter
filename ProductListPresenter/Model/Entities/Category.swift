@@ -8,14 +8,20 @@
 
 import ObjectMapper
 
-class Category: Mappable {
+class Category: NSObject, Mappable {
 
     var id: Int = 0
     var title: String = ""
     var imageUrl: String? = nil
     var hasSubcategories: Bool = false
 
-    required init?(map: Map) {}
+    override init() {
+        super.init()
+    }
+
+    required init?(map: Map) {
+        super.init()
+    }
 
     func mapping(map: Map) {
         self.id               <- map["categoryId"]

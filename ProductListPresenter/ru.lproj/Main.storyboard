@@ -111,6 +111,53 @@
             </objects>
             <point key="canvasLocation" x="-615.20000000000005" y="177.66116941529236"/>
         </scene>
+        <!--Корзина-->
+        <scene sceneID="U40-Da-dvo">
+            <objects>
+                <tableViewController storyboardIdentifier="ShoppingCartViewController" id="zH6-Gy-iGd" customClass="ShoppingCartViewController" customModule="ProductListPresenter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OBD-S5-Ogc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShoppingCartProductCell" textLabel="JyT-NG-lhV" style="IBUITableViewCellStyleDefault" id="xJG-GF-u61">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xJG-GF-u61" id="D6c-kw-SeA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="JyT-NG-lhV">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zH6-Gy-iGd" id="7gW-qS-ekR"/>
+                            <outlet property="delegate" destination="zH6-Gy-iGd" id="E7F-AJ-Nv6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Корзина" id="gCw-JF-dBV">
+                        <barButtonItem key="rightBarButtonItem" title="Каталог" id="qB5-YD-E9I">
+                            <connections>
+                                <segue destination="MZc-nC-KBf" kind="show" id="8Om-ae-lu5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Uix-xm-XrG" kind="show" identifier="ShoppingCartToProductDetailsSegue" id="Yo8-Ft-m4M"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gha-co-Sew" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1545" y="178"/>
+        </scene>
         <!--CategoryListViewController-->
         <scene sceneID="Mkv-NN-GWp">
             <objects>
@@ -259,15 +306,30 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3Y-9q-9ZF" customClass="RoundedButton" customModule="ProductListPresenter" customModuleProvider="target">
+                                                <rect key="frame" x="99" y="287" width="112" height="30"/>
+                                                <color key="backgroundColor" red="0.076685495674610138" green="0.47192865610122681" blue="0.96561425924301147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="9t4-mC-eb5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <state key="normal" title="В корзину">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onAddToCartButtonPress:" destination="Uix-xm-XrG" eventType="touchUpInside" id="W2x-GB-ZhB"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="MYO-uD-SiN" firstAttribute="leading" secondItem="lNN-By-8WE" secondAttribute="leading" constant="8" id="C52-Zw-hcr"/>
                                             <constraint firstAttribute="bottom" secondItem="dvt-i2-1ds" secondAttribute="bottom" constant="10" id="CmQ-wg-XG8"/>
+                                            <constraint firstItem="N3Y-9q-9ZF" firstAttribute="leading" secondItem="UuP-eF-1Ga" secondAttribute="trailing" constant="15" id="F5N-e2-zfk"/>
                                             <constraint firstItem="dvt-i2-1ds" firstAttribute="top" secondItem="HLx-o8-PuT" secondAttribute="bottom" constant="8" id="IcP-Hy-7tx"/>
+                                            <constraint firstItem="N3Y-9q-9ZF" firstAttribute="top" secondItem="MYO-uD-SiN" secondAttribute="bottom" id="NVf-Pa-sZ4"/>
                                             <constraint firstAttribute="trailing" secondItem="dvt-i2-1ds" secondAttribute="trailing" constant="8" id="SGD-H6-nUF"/>
                                             <constraint firstItem="MYO-uD-SiN" firstAttribute="top" secondItem="9oH-yP-JGf" secondAttribute="bottom" constant="10" id="TCF-s0-yeA"/>
-                                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="UuP-eF-1Ga" secondAttribute="trailing" constant="291" id="V3l-N3-uJQ"/>
                                             <constraint firstItem="dvt-i2-1ds" firstAttribute="leading" secondItem="lNN-By-8WE" secondAttribute="leading" constant="8" id="Yqa-1j-Bfh"/>
                                             <constraint firstItem="HLx-o8-PuT" firstAttribute="top" secondItem="UuP-eF-1Ga" secondAttribute="bottom" constant="5" id="al1-dU-kmI"/>
                                             <constraint firstItem="UuP-eF-1Ga" firstAttribute="leading" secondItem="XFN-gc-JnQ" secondAttribute="trailing" constant="5" id="b3w-kB-Uip"/>
@@ -278,6 +340,7 @@
                                             <constraint firstItem="HLx-o8-PuT" firstAttribute="leading" secondItem="lNN-By-8WE" secondAttribute="leading" constant="8" id="qfU-DE-sAQ"/>
                                             <constraint firstItem="9oH-yP-JGf" firstAttribute="centerX" secondItem="lNN-By-8WE" secondAttribute="centerX" id="s6E-hJ-K85"/>
                                             <constraint firstAttribute="trailing" secondItem="9oH-yP-JGf" secondAttribute="trailing" constant="10" id="se9-WT-ziL"/>
+                                            <constraint firstAttribute="trailing" secondItem="N3Y-9q-9ZF" secondAttribute="trailing" constant="164" id="t17-e9-r30"/>
                                             <constraint firstItem="UuP-eF-1Ga" firstAttribute="top" secondItem="MYO-uD-SiN" secondAttribute="bottom" constant="5" id="wae-qn-Nws"/>
                                             <constraint firstAttribute="trailing" secondItem="HLx-o8-PuT" secondAttribute="trailing" constant="8" id="xP0-ih-vs5"/>
                                             <constraint firstItem="9oH-yP-JGf" firstAttribute="leading" secondItem="lNN-By-8WE" secondAttribute="leading" constant="10" id="yWY-mm-Pk0"/>
@@ -325,12 +388,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="MZc-nC-KBf" kind="relationship" relationship="rootViewController" id="UO7-M9-bf1"/>
+                        <segue destination="zH6-Gy-iGd" kind="relationship" relationship="rootViewController" id="ZIk-Mm-Hhg"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQs-aD-U0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1441" y="178"/>
+            <point key="canvasLocation" x="-2473" y="178"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Yo8-Ft-m4M"/>
+    </inferredMetricsTieBreakers>
 </document>

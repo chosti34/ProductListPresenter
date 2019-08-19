@@ -15,6 +15,8 @@ class App {
     let categoryApi = CategoryApi()
     let productApi = ProductApi()
 
+    let shoppingCart = ShoppingCart()
+
     // Запрещаем создание экземпляра данного класса
     private init() {}
 
