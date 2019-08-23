@@ -8,11 +8,21 @@
 
 import UIKit
 
-class RoundedButton: UIButton {
+@IBDesignable class RoundedButton: UIButton {
+    @IBInspectable var cornerRadius: Double {
+        get {
+            return Double(self.layer.cornerRadius)
+        }
+        set {
+            self.layer.cornerRadius = CGFloat(newValue)
+        }
+    }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.layer.cornerRadius = 5
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
 }

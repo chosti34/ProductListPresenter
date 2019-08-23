@@ -9,8 +9,9 @@
 import UIKit
 
 class ShoppingCart: NSObject {
+    //TODO: ShoppingCartItem, product, count
 
-    private var products: [Product] = []
+    private var products: [Product] = [] //TODO: rename to "Items", hold ShoppingCartItem
 
     override init() {
         super.init()
@@ -18,6 +19,7 @@ class ShoppingCart: NSObject {
     }
 
     func addProduct(product: Product) {
+        //TODO: make smart work with ShoppingCartItem
         self.products.append(product)
         self.save()
     }
@@ -27,15 +29,18 @@ class ShoppingCart: NSObject {
         self.save()
     }
 
+    //TODO: rename product
     func getProduct(at index: Int) -> Product {
         return self.products[index]
     }
 
+    //TODO: rename productCount
     func getProductCount() -> Int {
         return self.products.count
     }
 
     private func save() {
+        //TODO: use object mapper to serialize to JSON
         let encoded: Data = NSKeyedArchiver.archivedData(withRootObject: self.products)
         UserDefaults.standard.set(encoded, forKey: "Products")
     }

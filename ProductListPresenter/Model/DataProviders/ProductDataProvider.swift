@@ -14,7 +14,6 @@ protocol ProductDataProviderDelegate {
 }
 
 class ProductDataProvider: NSObject {
-    // TODO: use UserDefaults
 
     var delegate: ProductDataProviderDelegate? = nil
 

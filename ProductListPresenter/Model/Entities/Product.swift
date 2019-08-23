@@ -11,8 +11,11 @@ import Foundation
 
 class Product: NSObject, NSCoding, Mappable {
 
+    //TODO: productId
     var id: Int = 0
     var title: String = ""
+
+    //TODO: desc - productDescription
     var desc: String? = nil
     var price: Int? = 0
     var imageUrl: String? = nil

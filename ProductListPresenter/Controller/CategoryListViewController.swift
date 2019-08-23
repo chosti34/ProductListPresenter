@@ -12,7 +12,7 @@ import MBProgressHUD
 
 class CategoryListViewController: UIViewController {
 
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     // Список категорий для отображения
     var categories: [Category] = []
@@ -28,18 +28,15 @@ class CategoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Если это подкатегория
+        // Указываем информацию о родительской категории, если выбрана подкатегория
         if self.parentCategory != nil {
-            self.navigationItem.rightBarButtonItem = nil
+            // self.navigationItem.rightBarButtonItem = nil
             self.navigationItem.title = "Подкатегории \"\(self.parentCategory!.title)\""
         }
-
-        print("CategoryCollectionViewController - viewDidLoad ended")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("categories viewWillAppear")
 
         if self.progressHUD != nil {
             self.progressHUD?.hide(animated: true)
@@ -67,18 +64,31 @@ class CategoryListViewController: UIViewController {
         }
     }
 
-    @IBAction func onCategoryDetailsButtonPress(_ sender: UIButton) {
-        self.selectedCategory = self.categories[sender.tag]
+    private func performSegueToProductListView(toCategoryIndex index: Int) {
+        self.selectedCategory = self.categories[index]
+        assert(self.selectedCategory != nil)
 
         if self.selectedCategory!.hasSubcategories {
-            self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let categoryListViewController = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController")
+            let segue = UIStoryboardSegue(identifier: "CategoryListToSubcategoryListSegue", source: self, destination: categoryListViewController, performHandler: {
+                //self.navigationController?.show(categoryListViewController, sender: self)
+                self.navigationController?.pushViewController(categoryListViewController, animated: true)
+            })
+            self.prepare(for: segue, sender: self)
+            segue.perform()
         } else {
             self.performSegue(withIdentifier: "CategoryListToProductListSegue", sender: self)
         }
     }
+
+    @IBAction func onCategoryDetailsButtonPress(_ sender: RoundedButton) {
+        self.performSegueToProductListView(toCategoryIndex: sender.tag)
+    }
 }
 
 extension CategoryListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.categories.count
     }
@@ -110,12 +120,6 @@ extension CategoryListViewController: UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedCategory = self.categories[indexPath.row]
-
-        if self.selectedCategory!.hasSubcategories {
-            self.performSegue(withIdentifier: "CategoryListToItselfSegue", sender: self)
-        } else {
-            self.performSegue(withIdentifier: "CategoryListToProductListSegue", sender: self)
-        }
+        self.performSegueToProductListView(toCategoryIndex: indexPath.row)
     }
 }

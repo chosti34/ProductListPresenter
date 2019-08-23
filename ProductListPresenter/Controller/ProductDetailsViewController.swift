@@ -25,6 +25,9 @@ class ProductDetailsViewController: UIViewController {
         // Если был произведен переход на данный экран, self.product должен быть проинициализирован
         assert(self.product != nil)
 
+        // Заголовок экрана - название товара
+        self.navigationItem.title = product!.title
+
         // Задаем название товара
         self.productNameLabel.text = self.product!.title
 
@@ -48,7 +51,7 @@ class ProductDetailsViewController: UIViewController {
         self.productDescriptionLabel.sizeToFit()
     }
 
-    @IBAction func onAddToCartButtonPress(_ sender: RoundedButton) {
+    @IBAction func onAddToShoppingCartButtonPress(_ sender: BorderedButton) {
         assert(self.product != nil)
         App.instance.shoppingCart.addProduct(product: self.product!)
 

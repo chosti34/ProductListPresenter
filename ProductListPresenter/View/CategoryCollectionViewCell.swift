@@ -21,12 +21,12 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
 
         // Ячейка категории будет иметь скругленную рамку
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 5
 
         // Картинка внутри ячейки также будет иметь рамку
-        self.imageView.layer.borderColor = UIColor.black.cgColor
+        self.imageView.layer.borderColor = UIColor.gray.cgColor
         self.imageView.layer.borderWidth = 1
     }
 

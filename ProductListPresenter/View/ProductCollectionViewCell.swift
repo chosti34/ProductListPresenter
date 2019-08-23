@@ -21,12 +21,12 @@ class ProductCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
 
         // Ячейка продукта будет иметь черную скругленную рамку
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 10
 
         // Изображние также будет иметь черную рамку
-        self.imageView.layer.borderColor = UIColor.black.cgColor
+        self.imageView.layer.borderColor = UIColor.gray.cgColor
         self.imageView.layer.borderWidth = 1
     }
 

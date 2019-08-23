@@ -11,9 +11,11 @@ import UIKit
 class ShoppingCartViewController: UITableViewController {
 
     var selectedProduct: Product? = nil
+    // TODO: place ShoppingCart here
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //TODO: get shopping cart from App.instance.shoppingCart.getProductCount()
 
         // Do any additional setup after loading the view.
     }
@@ -21,11 +23,6 @@ class ShoppingCartViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Navigation
@@ -40,9 +37,9 @@ class ShoppingCartViewController: UITableViewController {
         }
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return App.instance.shoppingCart.getProductCount()

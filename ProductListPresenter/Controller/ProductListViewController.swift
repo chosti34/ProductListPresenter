@@ -12,7 +12,7 @@ import MBProgressHUD
 // TODO: use UICollectionViewDelegateFlowLayout for cells layout
 class ProductListViewController: UIViewController {
 
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     // Список продуктов категории
     var products: [Product] = []
@@ -30,7 +30,7 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = category?.title ?? "Все продукты"
+        self.navigationItem.title = category != nil ? ("Продукты \"" + category!.title + "\"") : "Все продукты"
         self.progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
 
         self.dataProvider.delegate = self
@@ -50,6 +50,7 @@ class ProductListViewController: UIViewController {
     }
 
     @IBAction func onProductDetailsButtonPress(_ sender: RoundedButton) {
+        print("button pressed")
         self.openProductDetailScreen(product: self.products[sender.tag])
     }
 
@@ -97,6 +98,7 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("did select item at \(indexPath.row)")
         self.openProductDetailScreen(product: self.products[indexPath.row])
     }
 }
