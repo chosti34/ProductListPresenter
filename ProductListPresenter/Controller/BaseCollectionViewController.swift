@@ -32,13 +32,14 @@ class BaseCollectionViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
+    /*
     func showShoppingCartButton() {
         let barButtonItem = UIBarButtonItem()
         // TODO: customize, add handler
         self.navigationItem.rightBarButtonItem = barButtonItem
     }
+    */
 
     // TODO: add action to handle ShoppingCartButton
-
     // TODO: use Notification Center to handle keyboard
 }

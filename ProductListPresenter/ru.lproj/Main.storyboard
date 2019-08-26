@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,8 +45,20 @@
                                                         <constraint firstAttribute="height" constant="75" id="rIU-PT-0mV"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-oL-9X7">
-                                                    <rect key="frame" x="109" y="34" width="250" height="20"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Название товара" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-oL-9X7">
+                                                    <rect key="frame" x="109" y="11" width="250" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Цена" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="3kq-EW-RLO">
+                                                    <rect key="frame" x="109" y="35" width="235" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Количество" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="HVH-hp-V2w">
+                                                    <rect key="frame" x="109" y="59" width="235" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -55,14 +68,22 @@
                                                 <constraint firstItem="TlF-SJ-PdJ" firstAttribute="leading" secondItem="D6c-kw-SeA" secondAttribute="leading" constant="8" id="8wD-ry-mB8"/>
                                                 <constraint firstItem="Y50-oL-9X7" firstAttribute="leading" secondItem="TlF-SJ-PdJ" secondAttribute="trailing" constant="8" id="9qP-o8-xiY"/>
                                                 <constraint firstAttribute="bottom" secondItem="TlF-SJ-PdJ" secondAttribute="bottom" constant="8" id="Hbt-SA-sup"/>
+                                                <constraint firstItem="HVH-hp-V2w" firstAttribute="leading" secondItem="TlF-SJ-PdJ" secondAttribute="trailing" constant="8" id="Laq-aC-xAA"/>
                                                 <constraint firstItem="TlF-SJ-PdJ" firstAttribute="top" secondItem="D6c-kw-SeA" secondAttribute="top" constant="7" id="MTN-yD-ANV"/>
-                                                <constraint firstItem="Y50-oL-9X7" firstAttribute="top" secondItem="TlF-SJ-PdJ" secondAttribute="bottom" constant="-48" id="ddm-kn-pJn"/>
+                                                <constraint firstItem="3kq-EW-RLO" firstAttribute="top" secondItem="Y50-oL-9X7" secondAttribute="bottom" constant="4" id="XIq-6X-bG5"/>
+                                                <constraint firstItem="3kq-EW-RLO" firstAttribute="leading" secondItem="TlF-SJ-PdJ" secondAttribute="trailing" constant="8" id="ZRc-AA-9s1"/>
+                                                <constraint firstItem="HVH-hp-V2w" firstAttribute="top" secondItem="3kq-EW-RLO" secondAttribute="bottom" constant="4" id="lQU-NL-UJ4"/>
+                                                <constraint firstItem="Y50-oL-9X7" firstAttribute="top" secondItem="D6c-kw-SeA" secondAttribute="topMargin" id="m7O-pA-7MD"/>
                                                 <constraint firstAttribute="trailing" secondItem="Y50-oL-9X7" secondAttribute="trailing" constant="16" id="oUF-Kr-ZXU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3kq-EW-RLO" secondAttribute="trailing" constant="16" id="rkq-Kx-5gK"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HVH-hp-V2w" secondAttribute="trailing" constant="16" id="uTF-5k-Sml"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="itemCountLabel" destination="HVH-hp-V2w" id="iD6-Zt-JfC"/>
                                             <outlet property="itemImageView" destination="TlF-SJ-PdJ" id="gWS-SK-Jkk"/>
-                                            <outlet property="label" destination="Y50-oL-9X7" id="peT-Nt-BPb"/>
+                                            <outlet property="itemPriceLabel" destination="3kq-EW-RLO" id="xVb-Bc-iIX"/>
+                                            <outlet property="itemTitleLabel" destination="Y50-oL-9X7" id="peT-Nt-BPb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

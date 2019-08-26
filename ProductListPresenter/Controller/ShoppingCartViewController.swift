@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ShoppingCartViewController: UIViewController {
 
@@ -21,6 +22,13 @@ class ShoppingCartViewController: UIViewController {
         self.shoppingCart = App.instance.shoppingCart
     }
 
+    // Поскольку мы можем добавить товар и вернуться обратно на экран корзины,
+    // необходимо обновить данные таблицы при показе экрана
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             assert(selectedProduct != nil)
@@ -31,14 +39,22 @@ class ShoppingCartViewController: UIViewController {
 
 extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.shoppingCart.productCount()
+        return self.shoppingCart.productsCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartProductCell", for: indexPath) as! ShoppingCartItemTableViewCell
 
         let product = self.shoppingCart.product(at: indexPath.row)
-        cell.label.text = product.title + (product.price != nil ? " ($\(product.price!))" : "")
+        cell.itemTitleLabel.text = product.title
+        cell.itemPriceLabel.text = "Цена" + (product.price != nil ? ": " + String(product.price!) + "$" : " не установлена")
+        cell.itemCountLabel.text = String(self.shoppingCart.productCount(of: product)!) + " шт."
+
+        let url: URL? = (product.imageUrl != nil) ? URL(string: product.imageUrl!) : nil
+        cell.itemImageView.sd_setImage(
+            with: url,
+            placeholderImage: UIImage(named: "placeholder"),
+            options: SDWebImageOptions.continueInBackground)
 
         return cell
     }

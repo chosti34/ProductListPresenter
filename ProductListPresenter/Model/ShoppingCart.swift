@@ -7,11 +7,30 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class ShoppingCart: NSObject {
-    //TODO: ShoppingCartItem, product, count
 
-    private var products: [Product] = [] //TODO: rename to "Items", hold ShoppingCartItem
+    class Item: Mappable {
+        var product: Product?
+        var count: Int = 0
+
+        init(product: Product, count: Int) {
+            self.product = product
+            self.count = count
+        }
+
+        required init?(map: Map) {}
+
+        func mapping(map: Map) {
+            self.product <- map["product"]
+            self.count   <- map["count"]
+        }
+    }
+
+    private let userDefaultsKey = "ShoppingCartItems"
+
+    private var items: [Item] = []
 
     override init() {
         super.init()
@@ -19,41 +38,54 @@ class ShoppingCart: NSObject {
     }
 
     func addProduct(product: Product) {
-        //TODO: make smart work with ShoppingCartItem
-        self.products.append(product)
+        let found = self.items.index { (item: Item) -> Bool in
+            return item.product!.id == product.id
+        }
+
+        if let index = found {
+            self.items[index].count += 1
+        } else {
+            self.items.append(Item(product: product, count: 1))
+        }
+
         self.save()
     }
 
     func removeProduct(at index: Int) {
-        self.products.remove(at: index)
+        self.items.remove(at: index)
         self.save()
     }
 
     func product(at index: Int) -> Product {
-        return self.products[index]
+        return self.items[index].product!
     }
 
-    func productCount() -> Int {
-        return self.products.count
+    func productsCount() -> Int {
+        return self.items.count
+    }
+
+    func productCount(of product: Product) -> Int? {
+        let found = self.items.index { (item: Item) -> Bool in
+            return item.product!.id == product.id
+        }
+
+        if let index = found {
+            return self.items[index].count
+        }
+
+        return nil
     }
 
     private func save() {
-        //TODO: use object mapper to serialize to JSON
-        let encoded: Data = NSKeyedArchiver.archivedData(withRootObject: self.products)
-        UserDefaults.standard.set(encoded, forKey: "Products")
+        let jsonString = self.items.toJSONString(prettyPrint: true)
+        UserDefaults.standard.set(jsonString, forKey: self.userDefaultsKey)
     }
 
     private func load() {
-        guard let data = UserDefaults.standard.object(forKey: "Products") as? NSData else {
-            print("'Products' key not found in UserDefaults")
-            return
+        if let jsonString = UserDefaults.standard.string(forKey: self.userDefaultsKey) {
+            if let mappedItems = Mapper<Item>().mapArray(JSONString: jsonString)  {
+                self.items = mappedItems
+            }
         }
-
-        guard let decodedProducts = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [Product] else {
-            print("can't unarchive todo items data")
-            return
-        }
-
-        self.products = decodedProducts
     }
 }
