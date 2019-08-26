@@ -26,16 +26,16 @@ class ProductDetailsViewController: UIViewController {
         assert(self.product != nil)
 
         // Заголовок экрана - название товара
-        self.navigationItem.title = product!.title
+        self.navigationItem.title = product!.productTitle
 
         // Задаем название товара
-        self.productNameLabel.text = self.product!.title
+        self.productNameLabel.text = self.product!.productTitle
 
         // Задаем текст цены товара
-        self.productPriceLabel.text = (self.product!.price == nil ? "не установлена" : String(self.product!.price!) + "$")
+        self.productPriceLabel.text = (self.product!.productPrice == nil ? "не установлена" : String(self.product!.productPrice!) + "$")
 
         // Задаем описание товара
-        self.productDescriptionLabel.text = (self.product!.desc == nil) ? "Описание отсутствует" : self.product!.desc!
+        self.productDescriptionLabel.text = (self.product!.productDescription == nil) ? "Описание отсутствует" : self.product!.productDescription!
 
         // Описание в виде пустой строки не информативно
         if (self.productDescriptionLabel.text!.isEmpty) {
@@ -43,7 +43,7 @@ class ProductDetailsViewController: UIViewController {
         }
 
         // Задаем изображение продукта
-        let url: URL? = (self.product!.imageUrl == nil) ? nil : URL(string: self.product!.imageUrl!)
+        let url: URL? = (self.product!.productImageUrl == nil) ? nil : URL(string: self.product!.productImageUrl!)
         self.productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
     }
 
@@ -51,7 +51,7 @@ class ProductDetailsViewController: UIViewController {
         assert(self.product != nil)
         App.instance.shoppingCart.addProduct(product: self.product!)
 
-        let alertController = UIAlertController(title: "Товар '\(self.product!.title)' добавлен в корзину", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Товар '\(self.product!.productTitle)' добавлен в корзину", message: nil, preferredStyle: .alert)
 
         let continueAction = UIAlertAction(title: "Продолжить", style: .default, handler: nil)
         alertController.addAction(continueAction)

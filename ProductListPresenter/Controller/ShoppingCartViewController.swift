@@ -46,11 +46,11 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartProductCell", for: indexPath) as! ShoppingCartItemTableViewCell
 
         let product = self.shoppingCart.product(at: indexPath.row)
-        cell.itemTitleLabel.text = product.title
-        cell.itemPriceLabel.text = "Цена" + (product.price != nil ? ": " + String(product.price!) + "$" : " не установлена")
+        cell.itemTitleLabel.text = product.productTitle
+        cell.itemPriceLabel.text = "Цена" + (product.productPrice != nil ? ": " + String(product.productPrice!) + "$" : " не установлена")
         cell.itemCountLabel.text = String(self.shoppingCart.productCount(of: product)!) + " шт."
 
-        let url: URL? = (product.imageUrl != nil) ? URL(string: product.imageUrl!) : nil
+        let url: URL? = (product.productImageUrl != nil) ? URL(string: product.productImageUrl!) : nil
         cell.itemImageView.sd_setImage(
             with: url,
             placeholderImage: UIImage(named: "placeholder"),

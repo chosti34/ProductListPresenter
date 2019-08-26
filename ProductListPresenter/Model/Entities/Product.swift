@@ -6,49 +6,24 @@
 //  Copyright © 2019 Timur. All rights reserved.
 //
 
-import ObjectMapper
 import Foundation
+import ObjectMapper
 
-class Product: NSObject, NSCoding, Mappable {
+class Product: Mappable {
 
-    //TODO: productId
-    var id: Int = 0
-    var title: String = ""
+    var productId: Int = 0
+    var productTitle: String = ""
+    var productDescription: String? = nil
+    var productPrice: Int? = 0
+    var productImageUrl: String? = nil
 
-    //TODO: desc - productDescription
-    var desc: String? = nil
-    var price: Int? = 0
-    var imageUrl: String? = nil
-
-    override init() {
-        super.init()
-    }
-
-    required init?(map: Map) {
-        super.init()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeInteger(forKey: "id") as Int
-        self.title = aDecoder.decodeObject(forKey: "title") as! String
-        self.desc = aDecoder.decodeObject(forKey: "description") as! String?
-        self.price = aDecoder.decodeObject(forKey: "price") as! Int?
-        self.imageUrl = aDecoder.decodeObject(forKey: "imageUrl") as! String?
-    }
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.id, forKey: "id")
-        aCoder.encode(self.title, forKey: "title")
-        aCoder.encode(self.desc, forKey: "description")
-        aCoder.encode(self.price, forKey: "price")
-        aCoder.encode(self.imageUrl, forKey: "imageUrl")
-    }
+    required init?(map: Map) {}
 
     func mapping(map: Map) {
-        self.id       <- map["productId"]
-        self.title    <- map["title"]
-        self.desc     <- map["productDescription"]
-        self.price    <- map["price"]
-        self.imageUrl <- map["imageUrl"]
+        self.productId           <- map["productId"]
+        self.productTitle        <- map["title"]
+        self.productDescription  <- map["productDescription"]
+        self.productPrice        <- map["price"]
+        self.productImageUrl     <- map["imageUrl"]
     }
 }

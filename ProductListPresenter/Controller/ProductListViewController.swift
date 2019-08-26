@@ -86,13 +86,13 @@ extension ProductListViewController: UICollectionViewDelegate, UICollectionViewD
         let product = products[indexPath.row]
 
         // Задаем заголовок ячейки продукта
-        cell.titleLabel.text = product.title
+        cell.titleLabel.text = product.productTitle
 
         // Задаем цену в ячейке продукта
-        cell.priceLabel.text = (product.price != nil) ? (String(product.price!) + "$") : "Цена не установлена"
+        cell.priceLabel.text = (product.productPrice != nil) ? (String(product.productPrice!) + "$") : "Цена не установлена"
 
         // Устанавливаем изображение товара
-        let url: URL? = (product.imageUrl != nil) ? URL(string: product.imageUrl!) : nil
+        let url: URL? = (product.productImageUrl != nil) ? URL(string: product.productImageUrl!) : nil
         cell.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], completed: nil)
 
         return cell

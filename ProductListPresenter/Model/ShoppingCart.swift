@@ -39,7 +39,7 @@ class ShoppingCart: NSObject {
 
     func addProduct(product: Product) {
         let found = self.items.index { (item: Item) -> Bool in
-            return item.product!.id == product.id
+            return item.product!.productId == product.productId
         }
 
         if let index = found {
@@ -66,7 +66,7 @@ class ShoppingCart: NSObject {
 
     func productCount(of product: Product) -> Int? {
         let found = self.items.index { (item: Item) -> Bool in
-            return item.product!.id == product.id
+            return item.product!.productId == product.productId
         }
 
         if let index = found {
