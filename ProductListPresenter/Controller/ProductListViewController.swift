@@ -49,9 +49,7 @@ class ProductListViewController: BaseCollectionViewController {
         if let destinationViewController: ProductDetailsViewController = segue.destination as? ProductDetailsViewController {
             assert(self.selectedProduct != nil)
             destinationViewController.product = self.selectedProduct
-            return
         }
-        assert(false, "unexpected segue from product list view")
     }
 
     @IBAction func onProductDetailsButtonPress(_ sender: RoundedButton) {
@@ -116,10 +114,10 @@ extension ProductListViewController: ProductDataProviderDelegate {
     func dataProvider(_ dataProvider: ProductDataProvider, errorOccurredWithLoadingMode mode: DataProviderLoadingMode) {
         self.stopAnimatingRefreshControl()
         self.stopAnimatingProgressHUD()
-        self.collectionView.setContentOffset(CGPoint.zero, animated: true)
 
         if mode == .initial {
             self.showLoadingErrorNotificationAlert(message: "Произошла ошибка при загрузке продуктов")
+            self.collectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
 

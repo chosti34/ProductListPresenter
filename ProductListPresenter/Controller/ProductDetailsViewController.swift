@@ -47,10 +47,6 @@ class ProductDetailsViewController: UIViewController {
         self.productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
     }
 
-    override func viewWillLayoutSubviews() {
-        self.productDescriptionLabel.sizeToFit()
-    }
-
     @IBAction func onAddToShoppingCartButtonPress(_ sender: BorderedButton) {
         assert(self.product != nil)
         App.instance.shoppingCart.addProduct(product: self.product!)
@@ -59,12 +55,13 @@ class ProductDetailsViewController: UIViewController {
 
         let continueAction = UIAlertAction(title: "Продолжить", style: .default, handler: nil)
         alertController.addAction(continueAction)
+        alertController.preferredAction = continueAction
 
         let gotoShoppingCartViewAction = UIAlertAction(title: "Посмотреть корзину", style: .default) { (action: UIAlertAction) in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let shoppingCartViewController = storyboard.instantiateViewController(withIdentifier: "ShoppingCartViewController")
             let segue = UIStoryboardSegue(identifier: "ProductDetailsToShoppingCartSegue", source: self, destination: shoppingCartViewController, performHandler: {
-                self.navigationController?.show(shoppingCartViewController, sender: self)
+                self.navigationController?.pushViewController(shoppingCartViewController, animated: true)
             })
             self.prepare(for: segue, sender: self)
             segue.perform()

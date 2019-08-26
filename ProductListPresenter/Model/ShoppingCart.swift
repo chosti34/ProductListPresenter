@@ -29,13 +29,11 @@ class ShoppingCart: NSObject {
         self.save()
     }
 
-    //TODO: rename product
-    func getProduct(at index: Int) -> Product {
+    func product(at index: Int) -> Product {
         return self.products[index]
     }
 
-    //TODO: rename productCount
-    func getProductCount() -> Int {
+    func productCount() -> Int {
         return self.products.count
     }
 

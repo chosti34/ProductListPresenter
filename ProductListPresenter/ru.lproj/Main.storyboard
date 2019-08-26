@@ -19,44 +19,75 @@
     </customFonts>
     <scenes>
         <!--Корзина-->
-        <scene sceneID="U40-Da-dvo">
+        <scene sceneID="rgv-gx-Dhv">
             <objects>
-                <tableViewController storyboardIdentifier="ShoppingCartViewController" id="zH6-Gy-iGd" customClass="ShoppingCartViewController" customModule="ProductListPresenter" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OBD-S5-Ogc">
+                <viewController storyboardIdentifier="ShoppingCartViewController" title="Корзина" id="vp8-xN-5bs" customClass="ShoppingCartViewController" customModule="ProductListPresenter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iT7-Ld-l6Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShoppingCartProductCell" textLabel="JyT-NG-lhV" style="IBUITableViewCellStyleDefault" id="xJG-GF-u61">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xJG-GF-u61" id="D6c-kw-SeA">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="JyT-NG-lhV">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OBD-S5-Ogc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShoppingCartProductCell" rowHeight="90" id="xJG-GF-u61" customClass="ShoppingCartItemTableViewCell" customModule="ProductListPresenter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xJG-GF-u61" id="D6c-kw-SeA">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="zH6-Gy-iGd" id="7gW-qS-ekR"/>
-                            <outlet property="delegate" destination="zH6-Gy-iGd" id="E7F-AJ-Nv6"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Корзина" id="gCw-JF-dBV">
-                        <barButtonItem key="rightBarButtonItem" title="Каталог" id="qB5-YD-E9I"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gha-co-Sew" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="TlF-SJ-PdJ">
+                                                    <rect key="frame" x="8" y="7" width="93" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="93" id="CNw-8G-CD1"/>
+                                                        <constraint firstAttribute="height" constant="75" id="rIU-PT-0mV"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="Y50-oL-9X7">
+                                                    <rect key="frame" x="109" y="34" width="250" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TlF-SJ-PdJ" firstAttribute="leading" secondItem="D6c-kw-SeA" secondAttribute="leading" constant="8" id="8wD-ry-mB8"/>
+                                                <constraint firstItem="Y50-oL-9X7" firstAttribute="leading" secondItem="TlF-SJ-PdJ" secondAttribute="trailing" constant="8" id="9qP-o8-xiY"/>
+                                                <constraint firstAttribute="bottom" secondItem="TlF-SJ-PdJ" secondAttribute="bottom" constant="8" id="Hbt-SA-sup"/>
+                                                <constraint firstItem="TlF-SJ-PdJ" firstAttribute="top" secondItem="D6c-kw-SeA" secondAttribute="top" constant="7" id="MTN-yD-ANV"/>
+                                                <constraint firstItem="Y50-oL-9X7" firstAttribute="top" secondItem="TlF-SJ-PdJ" secondAttribute="bottom" constant="-48" id="ddm-kn-pJn"/>
+                                                <constraint firstAttribute="trailing" secondItem="Y50-oL-9X7" secondAttribute="trailing" constant="16" id="oUF-Kr-ZXU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemImageView" destination="TlF-SJ-PdJ" id="gWS-SK-Jkk"/>
+                                            <outlet property="label" destination="Y50-oL-9X7" id="peT-Nt-BPb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="vp8-xN-5bs" id="7AN-kE-EB7"/>
+                                    <outlet property="delegate" destination="vp8-xN-5bs" id="X4H-Jh-ZAL"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OBD-S5-Ogc" firstAttribute="trailing" secondItem="7L5-yQ-6e5" secondAttribute="trailing" id="LAY-Vk-Mqq"/>
+                            <constraint firstItem="OBD-S5-Ogc" firstAttribute="top" secondItem="7L5-yQ-6e5" secondAttribute="top" id="UJL-Nl-BFT"/>
+                            <constraint firstItem="OBD-S5-Ogc" firstAttribute="bottom" secondItem="7L5-yQ-6e5" secondAttribute="bottom" id="jsf-5T-TVl"/>
+                            <constraint firstItem="OBD-S5-Ogc" firstAttribute="leading" secondItem="7L5-yQ-6e5" secondAttribute="leading" id="uGn-Ft-8Nh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7L5-yQ-6e5"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="OBD-S5-Ogc" id="pUm-24-Lv4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3A-M9-Fst" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-942" y="1011"/>
+            <point key="canvasLocation" x="85.599999999999994" y="1027.736131934033"/>
         </scene>
         <!--Каталог-->
         <scene sceneID="rFE-na-bV7">
@@ -164,6 +195,9 @@
                                                 <color key="value" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="vp8-xN-5bs" kind="show" id="lda-UH-rVa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -312,6 +346,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="vp8-xN-5bs" kind="show" id="ykv-OG-Xl3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -481,7 +518,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="v6m-Gc-kBV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Карта товара" id="vww-Sp-H6g"/>
+                    <navigationItem key="navigationItem" title="Карта товара" id="vww-Sp-H6g">
+                        <barButtonItem key="rightBarButtonItem" title="Корзина" id="3xG-fg-Wf8">
+                            <connections>
+                                <segue destination="vp8-xN-5bs" kind="show" id="N8o-br-LdI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="productDescriptionLabel" destination="dvt-i2-1ds" id="fvP-sv-OKZ"/>
                         <outlet property="productImageView" destination="9oH-yP-JGf" id="wbb-Fc-uFK"/>
@@ -511,4 +554,10 @@
             <point key="canvasLocation" x="-1686" y="178"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="placeholder" width="300" height="225"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ykv-OG-Xl3"/>
+    </inferredMetricsTieBreakers>
 </document>

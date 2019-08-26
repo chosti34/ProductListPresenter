@@ -8,57 +8,59 @@
 
 import UIKit
 
-class ShoppingCartViewController: UITableViewController {
+class ShoppingCartViewController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
 
     var selectedProduct: Product? = nil
-    // TODO: place ShoppingCart here
+
+    var shoppingCart: ShoppingCart!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: get shopping cart from App.instance.shoppingCart.getProductCount()
-
-        // Do any additional setup after loading the view.
+        self.shoppingCart = App.instance.shoppingCart
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
-            // Get the new view controller using segue.destinationViewController.
-            // Pass the selected object to the new view controller.
             assert(selectedProduct != nil)
             productDetailsViewController.product = self.selectedProduct
         }
     }
+}
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return App.instance.shoppingCart.getProductCount()
+extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.shoppingCart.productCount()
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartProductCell", for: indexPath)
-        let product = App.instance.shoppingCart.getProduct(at: indexPath.row)
-        cell.textLabel?.text = product.title + (product.price != nil ? " ($\(product.price!))" : "")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartProductCell", for: indexPath) as! ShoppingCartItemTableViewCell
+
+        let product = self.shoppingCart.product(at: indexPath.row)
+        cell.label.text = product.title + (product.price != nil ? " ($\(product.price!))" : "")
+
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.selectedProduct = App.instance.shoppingCart.getProduct(at: indexPath.row)
-        self.performSegue(withIdentifier: "ShoppingCartToProductDetailsSegue", sender: self)
+        self.selectedProduct = self.shoppingCart.product(at: indexPath.row)
+
+        // Переход на страницу с подробным описанием продукта
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let productDetailsViewController = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController")
+        let segue = UIStoryboardSegue(identifier: "ShoppingCartToProductDetailsSegue", source: self, destination: productDetailsViewController, performHandler: {
+            self.navigationController?.pushViewController(productDetailsViewController, animated: true)
+        })
+        self.prepare(for: segue, sender: self)
+        segue.perform()
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            App.instance.shoppingCart.removeProduct(at: indexPath.row)
+            self.shoppingCart.removeProduct(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
 }

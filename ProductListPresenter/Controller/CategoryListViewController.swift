@@ -90,7 +90,6 @@ class CategoryListViewController: BaseCollectionViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let categoryListViewController = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController")
             let segue = UIStoryboardSegue(identifier: "CategoryListToSubcategoryListSegue", source: self, destination: categoryListViewController, performHandler: {
-                // self.navigationController?.show(categoryListViewController, sender: self)
                 self.navigationController?.pushViewController(categoryListViewController, animated: true)
             })
             self.prepare(for: segue, sender: self)
