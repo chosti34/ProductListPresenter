@@ -18,16 +18,18 @@ class ProductApi: BaseApi {
         return params
     }
 
-    func fetchProducts(categoryId: Int?, offset: Int = 0, completionHandler: @escaping ([Product]) -> Void) {
+    func fetchProducts(categoryId: Int?, offset: Int = 0, completionHandler: @escaping ([Product]) -> Void, errorHandler: @escaping () -> Void) {
         super.sendRequest(relativeUrl: relativeUrl, params: buildParams(categoryId, offset)) { (response: Any?) in
-            self.parseProducts(response, completionHandler)
+            self.parseProductsAndCallHandler(response, completionHandler, errorHandler)
         }
     }
 
-    private func parseProducts(_ response: Any?, _ completionHandler: ([Product]) -> Void) {
+    private func parseProductsAndCallHandler(_ response: Any?, _ completionHandler: ([Product]) -> Void, _ errorHandler: () -> Void) {
         if let jsonData = response as? [[String: Any]] {
             let products: [Product]? = Mapper<Product>().mapArray(JSONObject: jsonData)
             completionHandler(products!)
+            return
         }
+        errorHandler()
     }
 }

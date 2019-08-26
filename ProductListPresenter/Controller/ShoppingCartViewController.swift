@@ -15,7 +15,7 @@ class ShoppingCartViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: get shopping cart from App.instance.shoppingCart.getProductCount()
+        // TODO: get shopping cart from App.instance.shoppingCart.getProductCount()
 
         // Do any additional setup after loading the view.
     }
@@ -36,10 +36,6 @@ class ShoppingCartViewController: UITableViewController {
             productDetailsViewController.product = self.selectedProduct
         }
     }
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return App.instance.shoppingCart.getProductCount()

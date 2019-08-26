@@ -10,44 +10,46 @@ import UIKit
 import SDWebImage
 import MBProgressHUD
 
-class CategoryListViewController: UIViewController {
+class CategoryListViewController: BaseCollectionViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    //var refreshControl: UIRefreshControl!
 
-    // Список категорий для отображения
     var categories: [Category] = []
 
-    // Выбранная категория для перехода на следующий экран
+    // Выбранная пользователем категория для перехода на следующий экран
     var selectedCategory: Category? = nil
 
-    // Возможно категории списка являются подкатегориями
+    // Родительская категория для отображения подкатегорий на данном экране
     var parentCategory: Category? = nil
 
-    var progressHUD: MBProgressHUD? = nil
+    var categoryApi: CategoryApi! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.addSubview(self.refreshControl)
 
-        // Указываем информацию о родительской категории, если выбрана подкатегория
+        self.categoryApi = App.instance.categoryApi
+
+        // Указываем информацию о родительской категории
         if self.parentCategory != nil {
-            // self.navigationItem.rightBarButtonItem = nil
             self.navigationItem.title = "Подкатегории \"\(self.parentCategory!.title)\""
         }
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
 
-        if self.progressHUD != nil {
-            self.progressHUD?.hide(animated: true)
+        let errorCallback = { () -> Void in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.showLoadingErrorNotificationAlert(message: "Произошла ошибка при загрузке категорий")
         }
 
-        self.progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        App.instance.categoryApi.fetchCategories(parentId: self.parentCategory?.id) { (categories: [Category]) in
+        let successCallback = { (categories: [Category]) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             self.categories = categories
-            self.progressHUD?.hide(animated: true)
             self.collectionView?.reloadData()
         }
+
+        self.categoryApi.fetchCategories(parentId: self.parentCategory?.id, completionHandler: successCallback, errorHandler: errorCallback)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,6 +66,22 @@ class CategoryListViewController: UIViewController {
         }
     }
 
+    override func refreshCollectionViewDataImpl() {
+        let errorCallback = { () -> Void in
+            self.collectionView.setContentOffset(CGPoint.zero, animated: true)
+            self.refreshControl.endRefreshing()
+            self.showLoadingErrorNotificationAlert(message: "Произошла ошибка при загрузке категорий")
+        }
+
+        let successCallback = { (categories: [Category]) in
+            self.refreshControl.endRefreshing()
+            self.categories = categories
+            self.collectionView?.reloadData()
+        }
+
+        self.categoryApi.fetchCategories(parentId: self.parentCategory?.id, completionHandler: successCallback, errorHandler: errorCallback)
+    }
+
     private func performSegueToProductListView(toCategoryIndex index: Int) {
         self.selectedCategory = self.categories[index]
         assert(self.selectedCategory != nil)
@@ -72,7 +90,7 @@ class CategoryListViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let categoryListViewController = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController")
             let segue = UIStoryboardSegue(identifier: "CategoryListToSubcategoryListSegue", source: self, destination: categoryListViewController, performHandler: {
-                //self.navigationController?.show(categoryListViewController, sender: self)
+                // self.navigationController?.show(categoryListViewController, sender: self)
                 self.navigationController?.pushViewController(categoryListViewController, animated: true)
             })
             self.prepare(for: segue, sender: self)
@@ -88,13 +106,11 @@ class CategoryListViewController: UIViewController {
 }
 
 extension CategoryListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.categories.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         // Достаем ячейку с категорией
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
 
