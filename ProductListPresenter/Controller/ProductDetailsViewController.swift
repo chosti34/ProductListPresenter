@@ -19,6 +19,8 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
 
+    // MARK: - UIViewController overrides
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +49,21 @@ class ProductDetailsViewController: UIViewController {
         self.productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], context: nil)
     }
 
+    // MARK: - Segue helpers
+
+    private func performSegueOrGoBackToShoppingCart() {
+        let indexOfCurrentViewController = self.navigationController?.viewControllers.index(of: self)
+        let previousViewController = self.navigationController?.viewControllers[indexOfCurrentViewController! - 1]
+        if previousViewController as? ShoppingCartViewController != nil {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+
+        self.performSegue(withIdentifier: "ProductDetailsToShoppingCartSegue", sender: self)
+    }
+
+    // MARK: - Button press handlers
+
     @IBAction func onAddToShoppingCartButtonPress(_ sender: BorderedButton) {
         assert(self.product != nil)
         App.instance.shoppingCart.addProduct(product: self.product!)
@@ -58,16 +75,14 @@ class ProductDetailsViewController: UIViewController {
         alertController.preferredAction = continueAction
 
         let gotoShoppingCartViewAction = UIAlertAction(title: "Посмотреть корзину", style: .default) { (action: UIAlertAction) in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let shoppingCartViewController = storyboard.instantiateViewController(withIdentifier: "ShoppingCartViewController")
-            let segue = UIStoryboardSegue(identifier: "ProductDetailsToShoppingCartSegue", source: self, destination: shoppingCartViewController, performHandler: {
-                self.navigationController?.pushViewController(shoppingCartViewController, animated: true)
-            })
-            self.prepare(for: segue, sender: self)
-            segue.perform()
+            self.performSegueOrGoBackToShoppingCart()
         }
         alertController.addAction(gotoShoppingCartViewAction)
 
         self.present(alertController, animated: true, completion: nil)
+    }
+
+    @IBAction func onShoppingCartBarButtonPress(_ sender: Any) {
+        self.performSegueOrGoBackToShoppingCart()
     }
 }

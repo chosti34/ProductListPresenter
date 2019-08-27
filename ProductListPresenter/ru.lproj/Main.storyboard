@@ -254,7 +254,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="collectionView" destination="Jg8-Cy-4Ye" id="Lr3-L9-ctI"/>
+                        <outlet property="collectionView" destination="Jg8-Cy-4Ye" id="kZQ-2b-eO3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVa-GM-MhP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -542,7 +542,7 @@
                     <navigationItem key="navigationItem" title="Карта товара" id="vww-Sp-H6g">
                         <barButtonItem key="rightBarButtonItem" title="Корзина" id="3xG-fg-Wf8">
                             <connections>
-                                <segue destination="vp8-xN-5bs" kind="show" id="N8o-br-LdI"/>
+                                <action selector="onShoppingCartBarButtonPress:" destination="Uix-xm-XrG" id="FoL-hc-9AV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -552,6 +552,7 @@
                         <outlet property="productNameLabel" destination="MYO-uD-SiN" id="9ip-JV-1qf"/>
                         <outlet property="productPriceLabel" destination="UuP-eF-1Ga" id="wTF-lX-ZYT"/>
                         <outlet property="scrollView" destination="rk7-fe-E6s" id="WRq-lk-Nd2"/>
+                        <segue destination="vp8-xN-5bs" kind="show" identifier="ProductDetailsToShoppingCartSegue" id="dB4-cU-MjG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsa-TI-bbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -579,6 +580,6 @@
         <image name="placeholder" width="300" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ykv-OG-Xl3"/>
+        <segue reference="dB4-cU-MjG"/>
     </inferredMetricsTieBreakers>
 </document>
