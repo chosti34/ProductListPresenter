@@ -6,13 +6,13 @@
 * корзина.
 
 ## Экран каталога
-![Экран каталога](Images/catalog.png)
+![Экран каталога](/Images/catalog.png)
 
 ## Экран каталога (перевернутый)
-![Экран каталога (перевернутый)](Images/catalog_rotated.png)
+![Экран каталога (перевернутый)](/Images/catalog_rotated.png)
 
 ## Экран просмотра информации о товаре
-![Экран просмотра информации о товаре](Images/product_details.png)
+![Экран просмотра информации о товаре](/Images/product_details.png)
 
 ## Экран корзины
-![Экран корзины](Images/shopping_cart.png)
+![Экран корзины](/Images/shopping_cart.png)
