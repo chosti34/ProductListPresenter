@@ -6,13 +6,13 @@
 * корзина.
 
 ## Экран каталога
-![Экран каталога](Images/catalog.png "Экран каталога")
+![Экран каталога](https://github.com/chosti34/ProductListPresenter/blob/master/Images/catalog.jpg "Экран каталога")
 
 ## Экран каталога (перевернутый)
-![Экран каталога (перевернутый)](Images/catalog_rotated.png?raw=true)
+![Экран каталога (перевернутый)](https://github.com/chosti34/ProductListPresenter/blob/master/Images/catalog_roated.jpg "Экран каталога (перевернутый)")
 
 ## Экран просмотра информации о товаре
-![Экран просмотра информации о товаре](Images/product_details.png?raw=true)
+![Экран просмотра информации о товаре](https://github.com/chosti34/ProductListPresenter/blob/master/Images/product_details.jpg "Просмотр информации о товаре")
 
 ## Экран корзины
-![Экран корзины](Images/shopping_cart.png?raw=true)
+![Экран корзины](https://github.com/chosti34/ProductListPresenter/blob/master/Images/shopping_cart.jpg "Корзина")
