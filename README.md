@@ -9,7 +9,7 @@
 ![Экран каталога](https://github.com/chosti34/ProductListPresenter/blob/master/Images/catalog.jpg "Экран каталога")
 
 ## Экран каталога (перевернутый)
-![Экран каталога (перевернутый)](https://github.com/chosti34/ProductListPresenter/blob/master/Images/catalog_roated.jpg "Экран каталога (перевернутый)")
+![Экран каталога (перевернутый)](https://github.com/chosti34/ProductListPresenter/blob/master/Images/catalog_rotated.jpg "Экран каталога (перевернутый)")
 
 ## Экран просмотра информации о товаре
 ![Экран просмотра информации о товаре](https://github.com/chosti34/ProductListPresenter/blob/master/Images/product_details.jpg "Просмотр информации о товаре")
